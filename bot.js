@@ -14,9 +14,6 @@ const prefix = '.'
 const nekoclient = require('nekos.life')
 const neko = new nekoclient()
 const commands = JSON.parse(fs.readFileSync("./data/commands.json", "utf8"));
-const spammers = []
-let cooldown = new Set();
-const prettyMs = require('pretty-ms')
 client.login(process.env.SECERT_TOKEN);
 
 
@@ -56,12 +53,6 @@ desc: desc,
 usage: usage
 }
 }
-function addSpam(spammers, time, id, many) {
-spammers[id] = {
-    time: time, 
-    many: many
-} 
-}
 /////////////// Other Client Events //////////////////
 client.on("ready", () => {
 client.user.setActivity(".help | Soon..")
@@ -87,16 +78,6 @@ client.on('message', async function(message) {
 if(message.channel.type !== "text") return; 
 if(!message.content.startsWith(prefix)) return; 
 if(message.author.bot) return;
-if(cooldown.has(message.author.id)) {
-    message.delete();
-    message.channel.send(`:no_entry_sign: | **${message.author.username}**, Please cool down! (**${prettyMs(spammers[message.author.id].time - message.createdTimestamp, {compact: true})}** seconds left)`)
-    return;
-}
-{
-cooldown.add(message.author.id)
-console.log(cooldown.entries())
-addSpam(spammers, message.createdTimestamp + 3000, message.author.id, +1)
-}
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -443,9 +424,6 @@ else if(message.content.startsWith(`${prefix}mute`)){
     }, ms(mutetime));
   }
 ////////////////////////////////////////////////////////////////////////
-setTimeout(() => {
-    cooldown.delete(message.author.id)
-}, 3000)
 fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
   });
