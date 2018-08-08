@@ -343,7 +343,7 @@ if(!args) return message.channel.send(new RichEmbed()
 .setDescription("**Pick one of these games!**\n**Anime** →	*!quiz anime* | A quiz about an anime character")
 .setColor("BLUE")
 )
-   if(args.startsWith("anime")) {
+   if(args[0].startsWith("anime")) {
     let i = 0;
     const animec = games.animec[Math.floor(Math.random() * games.animec.length)];
     message .channel.send(new RichEmbed() 
