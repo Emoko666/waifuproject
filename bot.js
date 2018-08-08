@@ -75,6 +75,27 @@ helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life i
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
 process.on("unhandledRejection", (err) => client.channels.get("474245438837620736").send(`\`\`\`js\n${err}\`\`\` `))
+client.on('message', message => {
+    if(devs.includes(message.author.id)) {
+    const eargs = message.content.split(" ").slice(1);
+    const clean = text => {
+        if (typeof(text) === "string")
+          return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+        else
+            return text;
+      }
+    try {
+      const code = eargs.join(" ");
+      let evaled = eval(code);
+
+      if (typeof evaled !== "string")
+        evaled = require("util").inspect(evaled);    
+      message.channel.send(clean(evaled), {code:"xl"});
+    } catch (err) {
+      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+    }
+}
+})
 /////////////// Other Client Events //////////////////
 client.on('message', async function(message) {
 if(message.channel.type !== "text") return; 
