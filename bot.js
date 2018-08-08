@@ -90,7 +90,10 @@ if(!message.member.hasPermission("ADMINISTRATOR")){
 if(cooldown.has(message.author.id)){
     message.delete();
     return message.reply("You have to wait 5 seconds between commands.");
-  
+    setTimeout(() => {
+        cooldown.delete(message.author.id)
+      }, cdseconds * 1000)
+      
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
