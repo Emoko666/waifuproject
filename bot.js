@@ -74,7 +74,7 @@ helpcmd(commands, "Server", "all", "Info", "Shows server info.", `server`)
 helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current server.", `roles`)
 helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
 helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`)
-helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the e621 (furry) image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian]`)
+helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian | small-boobs | anal | pussy | wank]`)
 })
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
@@ -102,7 +102,7 @@ if (message.content === `${prefix}help`) {
     for (var cmd in commands) {
         if (commands[cmd].role.toUpperCase() === 'ALL') {
             commandsFound++
-            embed.addField(`${commands[cmd].name}`, `**Description:** ${commands[cmd].desc}\n**Usage:** ${prefix + commands[cmd].usage}`);
+            embed.addField(`${commands[cmd].name}`, `**Description:** ${commands[cmd].desc}\n**Usage:** \`\`${prefix + commands[cmd].usage}\`\``);
         }
     }
     embed.setFooter(`Currently showing all commands. To view a specific group do ${prefix}help [group / command]`)
@@ -342,11 +342,12 @@ message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errorm
 // Game Commands //
 
 if(message.content.startsWith(`${prefix}quiz`)) {
-if(!args) return message.channel.send(new RichEmbed()
+if(!message.content.slice(1)) return message.channel.send(new RichEmbed()
 .setThumbnail("https://images-ext-2.discordapp.net/external/ixx9VwaXIvBi71wGahYe_NzG51gFQonnXVBl2eEbQmk/https/cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png")
 .setDescription("**Pick one of these games!**\n**Anime** →	*!quiz anime* | A quiz about an anime character")
 .setColor("BLUE")
-)
+) 
+else  
    if(args[0].startsWith("anime")) {
     let i = 0;
     const animec = games.animec[Math.floor(Math.random() * games.animec.length)];
@@ -368,7 +369,7 @@ if(!args) return message.channel.send(new RichEmbed()
             }
     if(games.animec[0].answer.some(a => response.first().content === a)) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
     else return message.channel.send(`${wrong} **${message.author.username}** better luck next time!\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`);
-        }         
+        } 
 }
 //////////////////////////
 
