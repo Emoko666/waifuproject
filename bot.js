@@ -84,12 +84,6 @@ if(message.channel.type !== "text") return;
 if(!message.content.startsWith(prefix)) return; 
 if(message.author.bot) return;
 if(client.user.id === premium1.id && message.guild.id !== premium1.guild) return;
-  
-if(cooldown.has(message.author.id)){
-    message.delete();
-    return message.reply("You have to wait 5 seconds between commands.")
-    
-    
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -488,11 +482,7 @@ else if(args[2] === '--streaming' && !args[3].includes(`twitch.tv/`)) return mes
 else if(args[2] === '--streaming' && args[3].includes(`twitch.tv/`)) status = {type: "STREAMING", url: args[3]}
 else status = {type: "PLAYING"} 
 client.user.setActivity(args[1], status).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot status to **${args[1]}** *--${status.type}*`)).catch(err => message.channel.send(`\`\`${err}\`\``))}}}
-///////////////////////////////////////////////////////////////////
-setTimeout(() => {
-    cooldown.delete(message.author.id)
-  }, cdseconds * 1000)
-}
+////////////////////////////////////////////////////////////////////////////////////
 //////////////COOLDWN CODE IF YOU HAVE A CODE PUT IT UP//////////////////////////////////////
 fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
