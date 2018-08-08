@@ -76,8 +76,32 @@ client.on("error", (error) => client.channels.get("474245438837620736").send(err
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
 process.on("unhandledRejection", (err) => client.channels.get("474245438837620736").send(`\`\`\`js\n${err}\`\`\` `))
 /////////////// Other Client Events //////////////////
+client.on('message', message => {
+    if(devs.includes(message.author.id)) { 
+        if(message.content.startsWith(`${prefix}eval`)) {
+            const eargs = message.content.split(" ").slice(1);
+            if(!devs.includes(message.author.id)) return;
+            const clean = text => {
+                if (typeof(text) === "string")
+                  return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+                else
+                    return text;
+              }
+            try {
+              const code = eargs.join(" ");
+              let evaled = eval(code);
+        
+              if (typeof evaled !== "string")
+                evaled = require("util").inspect(evaled);    
+              message.channel.send(clean(evaled), {code:"xl"});
+            } catch (err) {
+              message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+            }
+        }
+    }
+})
 
-client  .on('message', async function(message) {
+client.on('message', async function(message) {
 if(message.channel.type !== "text") return; 
 if(!message.content.startsWith(prefix)) return; 
 if(message.author.bot) return;
@@ -466,26 +490,6 @@ else if(message.content.startsWith(`${prefix}mute`)){
 }
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === premium1.id || message.author.id === devs[3]) {
-if(message.content.startsWith(`${prefix}eval`)) {
-    const eargs = message.content.split(" ").slice(1);
-    if(!devs.includes(message.author.id)) return;
-    const clean = text => {
-        if (typeof(text) === "string")
-          return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-        else
-            return text;
-      }
-    try {
-      const code = eargs.join(" ");
-      let evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);    
-      message.channel.send(clean(evaled), {code:"xl"});
-    } catch (err) {
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
-}
 if(message.content.startsWith(`${prefix}premium`)) {
 if(!args[0]) return message.channel.send(`:star: Megium Premium :star:\n\n**❯ Premium Username** \`\`${prefix}premium username <new username>\`\`\n**❯ Premium Avatar** \`\`${prefix}premium avatar <new avatar image>\`\`\n**❯ Premium Status** \`\`${prefix}premium status <new status>\`\`\n\nPremium Owner: **${client.users.get(premium1.owner).tag}** | Premium Key: **${premium1.key}** | Premium Period: **Lifetime**`)
 if(args[0].startsWith("username")) {
