@@ -97,7 +97,7 @@ if (message.content === `${prefix}help`) {
         .setColor(0x1D82B6)
     let commandsFound = 0;
     for (var cmd in commands) {
-        if (commands[cmd].role.toUpperCase() === 'all') {
+        if (commands[cmd].role.toUpperCase() === 'ALL') {
             commandsFound++
             embed.addField(`${commands[cmd].name}`, `**Description:** ${commands[cmd].desc}\n**Usage:** ${prefix + commands[cmd].usage}`);
         }
