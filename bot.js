@@ -425,7 +425,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
                 mentionable: false
             });
             message.guild.channels.forEach(async (channel, id) => {
-                await channel.overwritePermissions(role, {
+                await channel.overwritePermissions(muterole, {
                     SEND_MESSAGES: false, 
                     ADD_REACTIONS: false
                 });
