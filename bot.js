@@ -459,6 +459,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
   if (message.content.startsWith(`${prefix}clear`)) {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
   if(!args[0]) return message.channel.send(":x: Please specify the number of messages to clear!");
+  if(args[0] < 100) return;
   message.channel.bulkDelete(args[0]).then(() => {
   message.channel.send(`<:megThumbs:475427359898599441> Cleared **${args[0]}** messages.`).then(msg => msg.delete(2000));
   })
