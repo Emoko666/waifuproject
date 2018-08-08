@@ -335,6 +335,7 @@ message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errorm
 // Game Commands //
 
 if(message.content.startsWith(`${prefix}quiz`)) {
+return message.channel.send(`:wrench: We're working on this command!`)
 if(!args[0]) return message.channel.send(new RichEmbed()
 .setThumbnail("https://images-ext-2.discordapp.net/external/ixx9VwaXIvBi71wGahYe_NzG51gFQonnXVBl2eEbQmk/https/cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png")
 .setDescription("**Pick one of these games!**\n**Anime** →	*!quiz anime* | A quiz about an anime character")
