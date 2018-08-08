@@ -463,11 +463,11 @@ if(message.content.startsWith(`${prefix}premium`)) {
 if(!args[0]) return message.channel.send(`:star: Megium Premium :star:\n\n**❯ Premium Username** \`\`${prefix}premium username <new username>\`\`\n**❯ Premium Avatar** \`\`${prefix}premium avatar <new avatar image>\`\`\n**❯ Premium Status** \`\`${prefix}premium status <new status>\`\`\n\nPremium Owner: **${client.users.get(premium1.owner).tag}** | Premium Key: **${premium1.key}** | Premium Period: **Lifetime**`)
 if(args[0].startsWith("username")) {
 if(args[1].length < 2 || args[1].length > 32) return message.channel.send(`:x: Username must be between 3 and 32 in length.`)
-client.user.setUsername(args[1]).catch(err => message.channel.send(`\`\`${err}\`\``))
+client.user.setUsername(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot username to **${args[1]}**`)).catch(err => message.channel.send(`\`\`${err}\`\``))
 }
 if(args[0].startsWith("avatar")) {
 if(!args[1].endsWith(".png") || args[1].endsWith(".gif") || args[1].endsWith(".webp") || args[1].endsWith(".jpg")) return message.channel.send(`:x: The url you entered doesn't seems to be an image.`) 
-client.user.setAvatar(args[1]).catch(err => message.channel.send(`\`\`${err}\`\``))
+client.user.setAvatar(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot avatar to ${args[1]}`, {embed: {image: {url: args[1]}}})).catch(err => message.channel.send(`\`\`${err}\`\``))
 }
 if(args[0].startsWith("status")) {
 let status;
@@ -478,7 +478,7 @@ else if(args[2] === '--streaming' && !args[3]) return message.channel.send(`:x: 
 else if(args[2] === '--streaming' && !args[3].includes(`twitch.tv/`)) return message.channel.send(`:x: Must be a twitch stream link.`)
 else if(args[2] === '--streaming' && args[3].includes(`twitch.tv/`)) status = {type: "STREAMING", url: args[3]}
 else status = {type: "PLAYING"} 
-client.user.setActivity(args[1], status).catch(err => message.channel.send(`\`\`${err}\`\``))}}}
+client.user.setActivity(args[1], status).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot status to **${args[1]}** *--${status.type}*`)).catch(err => message.channel.send(`\`\`${err}\`\``))}}}
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
