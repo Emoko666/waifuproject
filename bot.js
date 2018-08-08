@@ -330,6 +330,7 @@ message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errorm
 // Game Commands //
 
 if(message.content.startsWith(`${prefix}quiz`)) {
+return message.channel.send(`:wrench: We're working on this command!`);
 if(!args[0]) return message.channel.send(new RichEmbed()
 .setThumbnail("https://images-ext-2.discordapp.net/external/ixx9VwaXIvBi71wGahYe_NzG51gFQonnXVBl2eEbQmk/https/cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png")
 .setDescription(`**Pick one of these games!**\n**Anime** →	\`\`${prefix}quiz anime\`\` | A quiz about an anime character`)
@@ -344,7 +345,7 @@ else
     .setURL(animec.url)
     .addField('Possibilities', (animec.trick).map(a => `\`\`${++i}.\`\` **${a}**`).join("\n"))
     .setThumbnail(animec.url)
-    .setColor("YELLOW")
+    .setColor("GOLD")
     .setFooter(`Timeouts in 10 seconds!`, message.author.avatarURL)
     )
         try {
@@ -420,7 +421,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
         try {
             muterole = await message.guild.createRole({
                 name: "Muted", 
-                color: '#000000', 
+                color: 0x000000, 
                 permissions: [],
                 mentionable: false
             });
@@ -439,7 +440,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
     if(!mutetime) {
         await user.addRole(muterole)
         message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** has been muted. because '**${reason}**'.`)
-        user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`).catch(e);
+        user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`).catch(err => console.log(err));
     } 
     else
     (user.addRole(muterole));
@@ -456,11 +457,11 @@ else if(message.content.startsWith(`${prefix}mute`)){
                 inline: true
             }
         ]
-    }}).catch(e)
+    }}).catch(err => console.log(err))
     setTimeout(function(){
       user.removeRole(muterole);
       message.channel.send(`<:waifuThumbs:475427359898599441> **${user.user.username}** is no longer muted.`);
-      user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`).catch(e)
+      user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`).catch(err => console.log(err))
     }, ms(mutetime));
   }
 
