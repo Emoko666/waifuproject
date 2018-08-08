@@ -1,27 +1,24 @@
 const { Client, RichEmbed } = require('discord.js');
 const fs = require("fs");
-const devs = ['431150885549113344','244423000802328576','343383616895713290','171259176029257728'];
-const errmsg = "<:eRrOr:475075170231517184> **Oops, something unexpected happened!** The error was sent to our team and we'll do our best to fix it."
+const { premium1 } = require("./data/premium") 
+const ms = require('ms');
+const nekoclient = require('nekos.life')
+const neko = new nekoclient()
 const client = new Client({
     disableEveryone: true,
     messageCacheMaxSize: 500,
     messageCacheLifetime: 120,
     messageSweepInterval: 60
   });
-const ms = require('ms');
-const prefix = '.'
-const nekoclient = require('nekos.life')
-const neko = new nekoclient()
-const correct = "<:megCorrect:476545535348834324>"
-const wrong = "<:megWrong:476545382617186337>"
 const games = JSON.parse(fs.readFileSync('./data/games.json', "utf8"))
 const commands = JSON.parse(fs.readFileSync("./data/commands.json", "utf8"));
+const correct = "<:megCorrect:476545535348834324>"
+const wrong = "<:megWrong:476545382617186337>"
+const devs = ['431150885549113344','244423000802328576','343383616895713290','171259176029257728'];
+const errmsg = "<:eRrOr:475075170231517184> **Oops, something unexpected happened!** The error was sent to our team and we'll do our best to fix it."
+const prefix = '.'
 client.login(process.env.SECERT_TOKEN);
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 /////////////// Functions //////////////////
 function errormsg(message, err, cmd) {
     message.channel.send(errmsg) 
@@ -57,10 +54,9 @@ usage: usage
 }
 /////////////// Other Client Events //////////////////
 client.on("ready", () => {
+if(client.user.id === premium1.id) client.user.setActivity(client.user.username)
+else
 client.user.setActivity(".help | Soon..")
-if(client.user.id === '448481056560250902') {
-client.channels.get("448481056560250902").send(`*ahmm*`);   
-}
 client.channels.get("475028391473709068").send(`Megumi's bot is ready`)
 helpcmd(commands, "Hug", "all", "Action", "Hugs the specified user.", `hug <@user / @user1 @user2 ...>`)
 helpcmd(commands, "Kiss", "all", "Action", "Kisses the specified user.", `kiss <@user / @user1 @user2 ...>`)
@@ -87,8 +83,6 @@ if(!message.content.startsWith(prefix)) return;
 if(message.author.bot) return;
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// C O M M A N D S //////////////////
@@ -407,15 +401,15 @@ message.channel.send(new RichEmbed()
 .setAuthor(`${message.guild.name}'s Roles`,message.guild.iconURL)
 ).catch(err => errormsg(message, err, "roles"))
 
-} else if(message.content.startsWith(`${prefix}reboot`)) {
+} else if(message.content.startsWith(`${prefix}shutdown`)) {
 if(devs.includes(message.author.id)) {
-message.channel.send(`**Rebooting....**`).then(client.destroy())
-.catch(err => errormsg(message, err, "reboot"))
+message.channel.send(`**Shutting down....**`).then(client.destroy())
+.catch(err => errormsg(message, err, "shutdown"))
 }
 
 }else if(message.content.startsWith(`${prefix}ping`)) {
     message.channel.send("**Pinging...**").then((message)=> {
-    message.edit(`**Time Taken :ping_pong: ** \`${Date.now() - message.createdTimestamp} ms\`` + `\n **Discord API <:disc:475249489607917580> ** \`${client.ping} ms\``);
+    message.edit(`:ping_pong: Pong! ${Date.now() - message.createdTimestamp}ms`);
   }).catch(err => errormsg(message, err, "ping"))
 }
 
@@ -462,7 +456,16 @@ else if(message.content.startsWith(`${prefix}mute`)){
       user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`)
     }, ms(mutetime));
   }
-////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////PREMIUM////////////////////////////////////
+if(client.user.id === premium1.id && message.author.id === premium1.owner) {
+if(message.content.startsWith(`${prefix}premium`)) {
+if(!args[0]) return message.channel.send(`:star: Megium Premium :star:\n\n**❯ Premium Username** \`\`${prefix}premium username <new username>\`\`\n**❯ Premium Avatar** \`\`${prefix}premium avatar <new avatar image>\`\`\n**❯ Premium Status** \`\`${prefix}premium status <new status>\`\``)
+}
+}
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
   });
