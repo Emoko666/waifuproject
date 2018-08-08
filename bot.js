@@ -456,7 +456,7 @@ if (message.content.startsWith(`${prefix}clear`)) {
 if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
 if(!args[0] || isNaN(args)) return message.channel.send(":x: Please specify the number of messages to clear!");
 const messages = await message.channel.fetchMessages({limit: args[0]});
-message.channel.bulkDelete(messages).catch(err => errormsg(message, err, "clear")).then(()=> message.channel.send(`<:megThumbs:475427359898599441> Cleared **${message.size}** messages.`).then(msg => msg.delete(3000)));
+message.channel.bulkDelete(messages).catch(err => errormsg(message, err, "clear")).then(()=> message.channel.send(`<:megThumbs:475427359898599441> Cleared **${messages.size}** messages.`).then(msg => msg.delete(3000)));
 }
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === premium1.owner) {
