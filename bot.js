@@ -413,18 +413,29 @@ else if(message.content.startsWith(`${prefix}mute`)){
     let reason = args[2]
     if(!reason) reason = "Unspecified"
     if(!user) return message.reply(":x: Couldn't find user.");
-    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You Don't Have Permission");
+    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You don't have permission to do that.");
     if(user.hasPermission("MANAGE_MESSAGES")) return message.reply(":x: Can't mute them!");
     let muterole = message.guild.roles.find(`name`, "Muted")
-    if(user.roles.has(muterole.id)) return message.channel.send(`:x: **${user.user.username}** is already muted.`)
-    if(!muterole) message.guild.createRole({
-        name: "Muted", 
-        color: 'BLACK', 
-        permissions: [""],
-        mentionable: false
-    })
+    if(!muterole) {
+        try {
+            muterole = await message.guild.createRole({
+                name: "Muted", 
+                color: '#000000', 
+                permissions: [],
+                mentionable: false
+            });
+            message.guild.channels.forEach(async (channel, id) => {
+                await channel.overwritePermissions(role, {
+                    SEND_MESSAGES: false, 
+                    ADD_REACTIONS: false
+                });
+            })
+        } catch (err) {
+        errormsg(message, err, "mute")
+        }
+    }
     let mutetime = args[1];
-    if(!mutetime){
+    if(!mutetime) {
         user.addRole(muterole.id)
         message.channel.send(`:zipper_mouth: **${user.user.username}** has been muted. because '**${reason}**'.`)
         user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`)
