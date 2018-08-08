@@ -15,7 +15,7 @@ const nekoclient = require('nekos.life')
 const neko = new nekoclient()
 const correct = "<:megCorrect:476545535348834324>"
 const wrong = "<:megWrong:476545382617186337>"
-const games = JSON.parse(fs.readFileSync('./games.json', "utf8"))
+const games = JSON.parse(fs.readFileSync('./data/games.json', "utf8"))
 const commands = JSON.parse(fs.readFileSync("./data/commands.json", "utf8"));
 client.login(process.env.SECERT_TOKEN);
 
@@ -337,7 +337,7 @@ message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errorm
 
 // Game Commands //
 
-if(message.content.startsWith(`!quiz`)) {
+if(message.content.startsWith(`${prefix}quiz`)) {
 if(!args) return message.channel.send(new RichEmbed()
 .setThumbnail("https://images-ext-2.discordapp.net/external/ixx9VwaXIvBi71wGahYe_NzG51gFQonnXVBl2eEbQmk/https/cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png")
 .setDescription("**Pick one of these games!**\n**Anime** →	*!quiz anime* | A quiz about an anime character")
