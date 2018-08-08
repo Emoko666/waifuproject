@@ -344,11 +344,12 @@ else
     let i = 0;
     const animec = games.animec[Math.floor(Math.random() * games.animec.length)];
     message .channel.send(new RichEmbed() 
-    .setAuthor(message.author.username, message.author.avatarURL)
     .setDescription(`**Who is this character?**`)
-    .addField('Possibilities', (animec.trick).map(a => `${++i} ${a}`).join("\n"))
+    .setURL(animec.url)
+    .addField('Possibilities', (animec.trick).map(a => `\`\`${++i}.\`\` **${a}**`).join("\n"))
     .setThumbnail(animec.url)
-    .setFooter(`Timeouts in 10 seconds!`, "https://static.thenounproject.com/png/65850-200.png")
+    .setColor("YELLOW")
+    .setFooter(`Timeouts in 10 seconds!`, message.author.avatarURL)
     )
         try {
             var response = await message.channel.awaitMessages(msg2 => msg2.author.id === message.author.id, {
@@ -359,7 +360,7 @@ else
             } catch (error) {
             return message.channel.send(`:x: Timeout\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`) 
             }
-    if(animec.answer.some(a => response.first().content === a.toLowerCase())) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
+    if(animec.answer.some(a => response.first().content.includes(a))) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
     else return message.channel.send(`${wrong} **${message.author.username}** better luck next time!\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`);
         } 
 }
