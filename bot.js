@@ -491,8 +491,11 @@ else if(args[2] === '--streaming' && args[3].includes(`twitch.tv/`)) status = {t
 else status = {type: "PLAYING"} 
 client.user.setActivity(args[1], status).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot status to **${args[1]}** *--${status.type}*`)).catch(err => message.channel.send(`\`\`${err}\`\``))}}}
 ///////////////////////////////////////////////////////////////////
+setTimeout(() => {
+    cooldown.delete(message.author.id)
+  }, cdseconds * 1000)
 
-///////////////////////////////////////////////////////////////////
+//////////////COOLDOWN CODE IF YOU HAVE A CODE PUT IT UP//////////////////////////////////////
 fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
   });
