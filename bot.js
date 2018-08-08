@@ -460,7 +460,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === devs[3]) {
 if(message.content.startsWith(`${prefix}premium`)) {
-if(!args[0]) return message.channel.send(`:star: Megium Premium :star:\n\n**❯ Premium Username** \`\`${prefix}premium username <new username>\`\`\n**❯ Premium Avatar** \`\`${prefix}premium avatar <new avatar image>\`\`\n**❯ Premium Status** \`\`${prefix}premium status <new status>\`\`\n\nPremium Owner: **${client.users.get(premium1.id).tag}** Premium Key: **${premium1.key}** | Premium Period: **Lifetime**`)
+if(!args[0]) return message.channel.send(`:star: Megium Premium :star:\n\n**❯ Premium Username** \`\`${prefix}premium username <new username>\`\`\n**❯ Premium Avatar** \`\`${prefix}premium avatar <new avatar image>\`\`\n**❯ Premium Status** \`\`${prefix}premium status <new status>\`\`\n\nPremium Owner: **${client.users.get(premium1.owner).tag}** | Premium Key: **${premium1.key}** | Premium Period: **Lifetime**`)
 if(args[0].startsWith("username")) {
 if(args[1].length < 2 || args[1].length > 32) return message.channel.send(`:x: Username must be between 3 and 32 in length.`)
 client.user.setUsername(args[1]).catch(err => message.channel.send(`\`\`${err}\`\``))
