@@ -83,7 +83,7 @@ client  .on('message', async function(message) {
 if(message.channel.type !== "text") return; 
 if(!message.content.startsWith(prefix)) return; 
 if(!message.content.startsWith(prefix)) return;
-  if(cooldown.has(message.author.id)){
+if(cooldown.has(message.author.id)){
     message.delete();
     return message.reply("You have to wait 5 seconds between commands.")
   }
