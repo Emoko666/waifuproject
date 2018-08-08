@@ -466,7 +466,7 @@ if(args[1].length < 2 || args[1].length > 32) return message.channel.send(`:x: U
 client.user.setUsername(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot username to **${args[1]}**`)).catch(err => message.channel.send(`\`\`${err}\`\``))
 }
 if(args[0].startsWith("avatar")) {
-if(!args[1].endsWith(".png") || args[1].endsWith(".gif") || args[1].endsWith(".webp") || args[1].endsWith(".jpg")) return message.channel.send(`:x: The url you entered doesn't seems to be an image.`) 
+if(!args[1].endsWith(".png") || !args[1].endsWith(".gif") || !args[1].endsWith(".webp") || !args[1].endsWith(".jpg")) return message.channel.send(`:x: The url you entered doesn't seems to be an image.`) 
 client.user.setAvatar(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot avatar to ${args[1]}`, {embed: {image: {url: args[1]}}})).catch(err => message.channel.send(`\`\`${err}\`\``))
 }
 if(args[0].startsWith("status")) {
