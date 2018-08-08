@@ -272,7 +272,7 @@ if(message.content.startsWith(`${prefix}tickle`)) {
 if(message.content.startsWith(`${prefix}nsfw`)) {
 let nsfwimg;
 const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
-const randomResponds = randomRespondsSetUp[Math.floor(Math.random * randomRespondsSetUp.length)]
+const randomResponds = randomRespondsSetUp[Math.floor(Math.random() * randomRespondsSetUp.length)]
 if(!message.channel.nsfw) return message.channel.send(`:x: The channel must be **NSFW**.\nMore info: **<https://goo.gl/4AViTc>**`)
 if(!args[0]) {
 nsfwimg = await neko.getNSFWRandomHentaiGif()
@@ -415,7 +415,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
     if(!user) return message.reply(":x: Couldn't find user.");
     if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You don't have permission to do that.");
     if(user.hasPermission("MANAGE_MESSAGES")) return message.reply(":x: Can't mute them!");
-    let muterole = message.guild.roles.find(`name`, "Muted")
+    let muterole = message.guild.roles.find(r => r.name === "Muted")
     if(!muterole) {
         try {
             muterole = await message.guild.createRole({
@@ -430,18 +430,19 @@ else if(message.content.startsWith(`${prefix}mute`)){
                     ADD_REACTIONS: false
                 });
             })
-        } catch (err) {
+        } catch (e) {
         errormsg(message, err, "mute")
         }
     }
+    if(user.roles.has(muterole.id)) return message.channel.send(`:x: **${message.author.username}** is already muted.`);
     let mutetime = args[1];
     if(!mutetime) {
-        user.addRole(muterole.id)
+        await user.addRole(muterole)
         message.channel.send(`:zipper_mouth: **${user.user.username}** has been muted. because '**${reason}**'.`)
-        user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`)
+        user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`).catch(e);
     } 
     else
-    (user.addRole(muterole.id));
+    (user.addRole(muterole));
     message.channel.send(`:zipper_mouth: **${user.user.username}** has been muted for **${ms(ms(mutetime))}**. because '**${reason}**'`);
     user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`, {embed:{
         fields: [
@@ -455,15 +456,15 @@ else if(message.content.startsWith(`${prefix}mute`)){
                 inline: true
             }
         ]
-    }})
+    }}).catch(e)
     setTimeout(function(){
-      user.removeRole(muterole.id);
+      user.removeRole(muterole);
       message.channel.send(`<:waifuThumbs:475427359898599441> **${user.user.username}** is no longer muted.`);
-      user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`)
+      user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`).catch(e)
     }, ms(mutetime));
   }
-  else
-if (message.content.startsWith(`${prefix}clear`)) {
+
+else if (message.content.startsWith(`${prefix}clear`)) {
 await message.delete();
 if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
 if(!args[0] || isNaN(args)) return message.channel.send(":x: Please specify the number of messages to clear!");
