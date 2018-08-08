@@ -17,6 +17,8 @@ const wrong = "<:megWrong:476545382617186337>"
 const devs = ['431150885549113344','244423000802328576','343383616895713290','171259176029257728'];
 const errmsg = "<:eRrOr:475075170231517184> **Oops, something unexpected happened!** The error was sent to our team and we'll do our best to fix it."
 const prefix = '.'
+let cooldown = new Set();
+let cdseconds = 5;
 client.login(process.env.SECERT_TOKEN);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// Functions //////////////////
@@ -80,6 +82,14 @@ process.on("unhandledRejection", (err) => client.channels.get("47424543883762073
 client  .on('message', async function(message) {
 if(message.channel.type !== "text") return; 
 if(!message.content.startsWith(prefix)) return; 
+if(!message.content.startsWith(prefix)) return;
+  if(cooldown.has(message.author.id)){
+    message.delete();
+    return message.reply("You have to wait 5 seconds between commands.")
+  }
+  if(!message.member.hasPermission("ADMINISTRATOR")){
+    cooldown.add(message.author.id);
+  }
 if(message.author.bot) return;
 if(message.guild.id !== premium1.guild) return;
 let args = message.content.split(" ").slice(1);
@@ -457,7 +467,6 @@ else if(message.content.startsWith(`${prefix}mute`)){
       user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`)
     }, ms(mutetime));
   }
-
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === devs[3]) {
 if(message.content.startsWith(`${prefix}premium`)) {
@@ -482,8 +491,11 @@ else if(args[2] === '--streaming' && args[3].includes(`twitch.tv/`)) status = {t
 else status = {type: "PLAYING"} 
 client.user.setActivity(args[1], status).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot status to **${args[1]}** *--${status.type}*`)).catch(err => message.channel.send(`\`\`${err}\`\``))}}}
 ///////////////////////////////////////////////////////////////////
+setTimeout(() => {
+    cooldown.delete(message.author.id)
+  }, cdseconds * 1000)
 
-///////////////////////////////////////////////////////////////////
+//////////////COOLDOWN CODE IF YOU HAVE A CODE PUT IT UP//////////////////////////////////////
 fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
   });
