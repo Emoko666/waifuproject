@@ -412,7 +412,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
     user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
     let reason = args[2]
     if(!reason) reason = "Unspecified"
-    if(!user) return message.reply(":x: Couldn't find user.");
+    if(!user) return message.channel.send(":x: Couldn't find user.");
     if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You don't have permission to do that.");
     if(user.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: Seems you can't mute them.");
     let muterole = message.guild.roles.find(r => r.name === "Muted")
