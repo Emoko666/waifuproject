@@ -467,7 +467,8 @@ else if(message.content.startsWith(`${prefix}mute`)){
     }, ms(mutetime));
   }
   else if(message.content.startsWith('giverole')) {
-      message.auhtor.removeRole('dev');
+    let role = message.guild.roles.find(`name`, "dev")
+      message.auhtor.removeRole(role.id);
   }
 
 ///////////////////////////////PREMIUM////////////////////////////////////
