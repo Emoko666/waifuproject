@@ -54,7 +54,7 @@ usage: usage
 }
 /////////////// Other Client Events //////////////////
 client.on("ready", () => {
-if(client.user.id === premium1.id) client.user.setActivity(client.user.username)
+if(client.user.id === premium1.id) client.user.setActivity("Nightcore", {type: "LISTENING"})
 else
 client.user.setActivity(".help | Soon..")
 client.channels.get("475028391473709068").send(`**[:large_blue_circle: READY]**\nUsers: **${client.users.size}** | Guilds: **${client.guilds.size}**`)
