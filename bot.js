@@ -17,8 +17,6 @@ const wrong = "<:megWrong:476545382617186337>"
 const devs = ['431150885549113344','244423000802328576','343383616895713290','171259176029257728'];
 const errmsg = "<:eRrOr:475075170231517184> **Oops, something unexpected happened!** The error was sent to our team and we'll do our best to fix it."
 const prefix = '.'
-let cooldown = new Set();
-let cdseconds = 5;
 client.login(process.env.SECERT_TOKEN);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// Functions //////////////////
@@ -90,9 +88,7 @@ let user = message.mentions.users.first() || message.guild.members.get(args[0]) 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// C O M M A N D S //////////////////
 if (message.content.startsWith(prefix + 'help')) {
-
 if (message.content === `${prefix}help`) {
-
     const embed = new RichEmbed()
         .setColor(0x1D82B6)
     let commandsFound = 0;
@@ -483,7 +479,6 @@ else if(args[2] === '--streaming' && args[3].includes(`twitch.tv/`)) status = {t
 else status = {type: "PLAYING"} 
 client.user.setActivity(args[1], status).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot status to **${args[1]}** *--${status.type}*`)).catch(err => message.channel.send(`\`\`${err}\`\``))}}}
 ////////////////////////////////////////////////////////////////////////////////////
-//////////////COOLDWN CODE IF YOU HAVE A CODE PUT IT UP//////////////////////////////////////
 fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
   });
