@@ -348,7 +348,7 @@ else
     .setDescription(`**Who is this character?**`)
     .addField('Possibilities', (animec.trick).map(a => `${++i} ${a}`).join("\n"))
     .setThumbnail(animec.url)
-    .setFooter(`Timeouts in 10 seconds!`, "https://previews.123rf.com/images/siamimages/siamimages1602/siamimages160200865/51555582-time-clock-icon-illustration-sign-design.jpg")
+    .setFooter(`Timeouts in 10 seconds!`, "https://static.thenounproject.com/png/65850-200.png")
     )
         try {
             var response = await message.channel.awaitMessages(msg2 => msg2.author.id === message.author.id, {
@@ -359,7 +359,7 @@ else
             } catch (error) {
             return message.channel.send(`:x: Timeout\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`) 
             }
-    if(animec.answer.some(a => response.first().content.toLowerCase() === a)) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
+    if(animec.answer.some(a => response.first().content === a.toLowerCase())) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
     else return message.channel.send(`${wrong} **${message.author.username}** better luck next time!\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`);
         } 
 }
