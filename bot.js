@@ -468,7 +468,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
 else if(message.content.startsWith(`${prefix}unmute`)) {
 let muterole = message.guild.roles.find(r => r.name === "Muted")
 user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
-if(message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(`:x: You don't have permission to do that.`)
+if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(`:x: You don't have permission to do that.`)
 if(!user.roles.has(muterole)) return message.channel.send(`:x: **${user.user.username}** isn't muted!`)
 await user.removeRole(muterole); 
 message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** is now unmuted.`)
