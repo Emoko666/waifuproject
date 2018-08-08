@@ -13,6 +13,9 @@ const ms = require('ms');
 const prefix = '.'
 const nekoclient = require('nekos.life')
 const neko = new nekoclient()
+const correct = "<:megCorrect:476545535348834324>"
+const wrong = "<:megWrong:476545382617186337>"
+const games = JSON.parse(fs.readFileSync('./games.json', "utf8"))
 const commands = JSON.parse(fs.readFileSync("./data/commands.json", "utf8"));
 client.login(process.env.SECERT_TOKEN);
 
@@ -98,7 +101,7 @@ if (message.content === `${prefix}help`) {
             embed.addField(`${commands[cmd].name}`, `**Description:** ${commands[cmd].desc}\n**Usage:** ${prefix + commands[cmd].usage}`);
         }
     }
-    embed.setFooter(`Currently showing user commands. To view another group do ${prefix}help [group / command]`)
+    embed.setFooter(`Currently showing all commands. To view a specific group do ${prefix}help [group / command]`)
     embed.setDescription(`**${commandsFound} commands found** - <> means required, [] means optional`)
 
     message.author.send({embed})
@@ -269,6 +272,7 @@ if(message.content.startsWith(`${prefix}tickle`)) {
 
 
 // NSFW Commands //
+
 if(message.content.startsWith(`${prefix}nsfw`)) {
 let nsfwimg;
 const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
@@ -331,8 +335,38 @@ message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errorm
 //////////////////////////
 
 
+// Game Commands //
 
-
+if(message.content.startsWith(`!quiz`)) {
+if(!args) return message.channel.send(new RichEmbed()
+.setThumbnail("https://images-ext-2.discordapp.net/external/ixx9VwaXIvBi71wGahYe_NzG51gFQonnXVBl2eEbQmk/https/cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png")
+.setDescription("**Pick one of these games!**\n**Anime** →	*!quiz anime* | A quiz about an anime character")
+.setColor("BLUE")
+)
+   if(args[0].startsWith("anime")) {
+    let i = 0;
+    const animec = games.animec[Math.floor(Math.random() * games.animec.length)];
+    message.channel.send(new RichEmbed() 
+    .setAuthor(message.author.username, message.author.avatarURL)
+    .setDescription(`**Who is this character?**`)
+    .addField('Possibilities', (animec.trick).map(a => `${++i} ${a}`).join("\n"))
+    .setThumbnail(animec.url)
+    .setFooter(`Timeouts in 10 seconds!`, client.user.avatarURL)
+    )
+        try {
+            var response = await message.channel.awaitMessages(msg2 => msg2.author.id === message.author.id, {
+                maxMatches: 1,
+                time: 10000,
+                errors: ['time'],
+            });
+            } catch (error) {
+            return message.channel.send(`**:x: Timeout**`) 
+            }
+    if(games.animec[0].answer.some(a => response.first().content === a)) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
+    else return message.channel.send(`${wrong} **${message.author.username}** better luck next time!\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`);
+        }         
+}
+//////////////////////////
 
 
 else if(message.content.startsWith(`${prefix}avatar`)) {
