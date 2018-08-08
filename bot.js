@@ -414,7 +414,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
     if(!reason) reason = "Unspecified"
     if(!user) return message.reply(":x: Couldn't find user.");
     if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You don't have permission to do that.");
-    if(user.hasPermission("MANAGE_MESSAGES")) return message.reply(":x: Can't mute them!");
+    if(user.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: Seems you can't mute them.");
     let muterole = message.guild.roles.find(r => r.name === "Muted")
     if(!muterole) {
         try {
@@ -434,17 +434,17 @@ else if(message.content.startsWith(`${prefix}mute`)){
         errormsg(message, err, "mute")
         }
     }
-    if(user.roles.has(muterole.id)) return message.channel.send(`:x: **${message.author.username}** is already muted.`);
+    if(user.roles.has(muterole.id)) return message.channel.send(`:x: **${user.user.username}** is already muted.`);
     let mutetime = args[1];
     if(!mutetime) {
         await user.addRole(muterole)
-        message.channel.send(`:zipper_mouth: **${user.user.username}** has been muted. because '**${reason}**'.`)
+        message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** has been muted. because '**${reason}**'.`)
         user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`).catch(e);
     } 
     else
     (user.addRole(muterole));
-    message.channel.send(`:zipper_mouth: **${user.user.username}** has been muted for **${ms(ms(mutetime))}**. because '**${reason}**'`);
-    user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`, {embed:{
+    message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** has been muted for **${ms(ms(mutetime))}**. because '**${reason}**'`);
+    user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`, {embed: {
         fields: [
             {
                 name: "Duration",
@@ -464,6 +464,15 @@ else if(message.content.startsWith(`${prefix}mute`)){
     }, ms(mutetime));
   }
 
+else if(message.content.startsWith(`${prefix}unmute`)) {
+let muterole = message.guild.roles.find(r => r.name === "Muted")
+user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
+if(message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(`:x: You don't have permission to do that.`)
+if(!user.roles.has(muterole)) return message.channel.send(`:x: **${user.user.username}** isn't muted!`)
+await user.removeRole(muterole); 
+message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** is now unmuted.`)
+}
+
 else if (message.content.startsWith(`${prefix}clear`)) {
 await message.delete();
 if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
@@ -471,6 +480,7 @@ if(!args[0] || isNaN(args)) return message.channel.send(":x: Please specify the 
 const messages = await message.channel.fetchMessages({limit: args[0]});
 message.channel.bulkDelete(messages).catch(err => errormsg(message, err, "clear")).then(()=> message.channel.send(`<:megThumbs:475427359898599441> Cleared **${messages.size}** messages.`).then(msg => msg.delete(3000)));
 }
+
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === premium1.owner) {
 if(message.content.startsWith(`${prefix}premium`)) {
@@ -499,4 +509,3 @@ fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
   });
 });
-
