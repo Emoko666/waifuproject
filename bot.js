@@ -453,6 +453,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
   }
   else
 if (message.content.startsWith(`${prefix}clear`)) {
+await message.delete();
 if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
 if(!args[0] || isNaN(args)) return message.channel.send(":x: Please specify the number of messages to clear!");
 const messages = await message.channel.fetchMessages({limit: args[0]});
