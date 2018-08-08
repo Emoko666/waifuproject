@@ -3,33 +3,36 @@
     
     "animec":[
     { 
-     "question": "Who is this chartacher?",
      "url": "https://vignette.wikia.nocookie.net/yahari/images/9/91/Yukino_S206.png/revision/latest?cb=20150515055352",
      "answer": ["1", "Yukinoshita Yukino"],
      "trick": ["Yukinoshita Yukino", "Hachiman", "Usui Takumi", "Totsuka Saika"]
     }   
-        
      ,{ 
-     "question": "Who is this chartacher?",
-     "url": "https://pbs.twimg.com/profile_images/791148014949822464/Y0RfDzb6_400x400.jpg",
+     "url": "http://anime.mexat.com/wp-content/uploads/2014/10/159375.jpg",
      "answer": ["3", "Yuuki Asuna"],
      "trick": ["Scarlet Erza", "Oshino Shinobu", "Yuuki asuna", "Holo"]
     }
-        
       ,{ 
-     "question": "Who is this chartacher?",
-     "url": "https://pbs.twimg.com/profile_images/791148014949822464/Y0RfDzb6_400x400.jpg",
-     "answer": ["2", "Konta Izumi"],
-     "trick": ["Zero Two", "Konta Izumi", "Lucky", "Yui Hirasawa"]
+     "url": "https://i.pinimg.com/originals/48/e7/e0/48e7e078f30a0b3eb01d00660bc88a56.jpg",
+     "answer": ["2", "Zero Two"],
+     "trick": ["Emilia", "Zero Two", "Totsuka Saika", "Yui Hirasawa"]
     }
-
-
-        
-         
+      ,{ 
+     "url": "https://myanimelist.cdn-dena.com/images/characters/10/139621.jpg",
+     "answer": ["4", "Yuzuriha, Inori"],
+     "trick": ["Kiryuu, Zero", "Hero", "Nagisa Furukawa", "Yuzuriha, Inori"]
+    }
+      ,{ 
+     "url": "https://myanimelist.cdn-dena.com/images/characters/10/293375.jpg",
+     "answer": ["2", "Gaara"],
+     "trick": ["Okazaki, Tomoya", "Gaara", "Yoshino, Yusuke", "Happy"]
+    }
+      ,{ 
+     "url": "https://myanimelist.cdn-dena.com/images/characters/10/258757.jpg",
+     "answer": ["1", "Trafalgar, Law"],
+     "trick": ["Trafalgar, Law", "Accelerator", "Inaba, Himeko", "Gilgamesh"]
+    }
         
     ]
-
-
-
 } 
 
