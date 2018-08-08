@@ -1,6 +1,5 @@
 const { Client, RichEmbed } = require('discord.js');
 const fs = require("fs");
-const moment = require("moment");
 const devs = ['431150885549113344','244423000802328576','343383616895713290','171259176029257728'];
 const errmsg = "<:eRrOr:475075170231517184> **Oops, something unexpected happened!** The error was sent to our team and we'll do our best to fix it."
 const client = new Client({
@@ -71,7 +70,8 @@ helpcmd(commands, "Avatar", "all", "Info", "Shows specified user avatar or your 
 helpcmd(commands, "Server", "all", "Info", "Shows server info.", `server`)
 helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current server.", `roles`)
 helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
-helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `ping`)
+helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`)
+helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the e621 (furry) image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian]`)
 })
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
