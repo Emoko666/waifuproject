@@ -57,7 +57,7 @@ client.on("ready", () => {
 if(client.user.id === premium1.id) client.user.setActivity(client.user.username)
 else
 client.user.setActivity(".help | Soon..")
-client.channels.get("475028391473709068").send(`Megumi's bot is ready`)
+client.channels.get("475028391473709068").send(`**[:large_blue_circle: READY]**\nUsers: **${client.users.size}** | Guilds: **${client.guilds.size}**`)
 helpcmd(commands, "Hug", "all", "Action", "Hugs the specified user.", `hug <@user / @user1 @user2 ...>`)
 helpcmd(commands, "Kiss", "all", "Action", "Kisses the specified user.", `kiss <@user / @user1 @user2 ...>`)
 helpcmd(commands, "Slap", "all", "Action", "Slaps the specified user.", `slap <@user / @user1 @user2 ...>`)
