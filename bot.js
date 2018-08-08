@@ -84,11 +84,10 @@ if(message.channel.type !== "text") return;
 if(!message.content.startsWith(prefix)) return; 
 if(message.author.bot) return;
 if(client.user.id === premium1.id && message.guild.id !== premium1.guild) return;
-    cooldown.add(message.author.id);
   
 if(cooldown.has(message.author.id)){
     message.delete();
-    return message.reply("You have to wait 5 seconds between commands.");
+    return message.reply("You have to wait 5 seconds between commands.")
     
     
 let args = message.content.split(" ").slice(1);
