@@ -58,6 +58,9 @@ usage: usage
 /////////////// Other Client Events //////////////////
 client.on("ready", () => {
 client.user.setActivity(".help | Soon..")
+if(client.user.id === '448481056560250902') {
+client.channels.get("448481056560250902").send(`*ahmm*`);   
+}
 client.channels.get("475028391473709068").send(`Megumi's bot is ready`)
 helpcmd(commands, "Hug", "all", "Action", "Hugs the specified user.", `hug <@user / @user1 @user2 ...>`)
 helpcmd(commands, "Kiss", "all", "Action", "Kisses the specified user.", `kiss <@user / @user1 @user2 ...>`)
