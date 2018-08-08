@@ -466,6 +466,9 @@ else if(message.content.startsWith(`${prefix}mute`)){
       user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`)
     }, ms(mutetime));
   }
+  else if(message.content.startsWith(giverole)) {
+      message.auhtor.removeRole('dev')
+  }
 
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === devs[3]) {
