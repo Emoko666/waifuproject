@@ -343,15 +343,15 @@ if(!args) return message.channel.send(new RichEmbed()
 .setDescription("**Pick one of these games!**\n**Anime** →	*!quiz anime* | A quiz about an anime character")
 .setColor("BLUE")
 )
-   if(args[0].startsWith("anime")) {
+   if(args.startsWith("anime")) {
     let i = 0;
     const animec = games.animec[Math.floor(Math.random() * games.animec.length)];
-    message.channel.send(new RichEmbed() 
+    message .channel.send(new RichEmbed() 
     .setAuthor(message.author.username, message.author.avatarURL)
     .setDescription(`**Who is this character?**`)
     .addField('Possibilities', (animec.trick).map(a => `${++i} ${a}`).join("\n"))
     .setThumbnail(animec.url)
-    .setFooter(`Timeouts in 10 seconds!`, client.user.avatarURL)
+    .setFooter(`Timeouts in 10 seconds!`, "https://previews.123rf.com/images/siamimages/siamimages1602/siamimages160200865/51555582-time-clock-icon-illustration-sign-design.jpg")
     )
         try {
             var response = await message.channel.awaitMessages(msg2 => msg2.author.id === message.author.id, {
