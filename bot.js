@@ -357,7 +357,7 @@ else
                 errors: ['time'],
             });
             } catch (error) {
-            return message.channel.send(`**:x: Timeout**`) 
+            return message.channel.send(`:x: Timeout\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`) 
             }
     if(animec.answer.some(a => response.first().content === a)) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
     else return message.channel.send(`${wrong} **${message.author.username}** better luck next time!\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`);
