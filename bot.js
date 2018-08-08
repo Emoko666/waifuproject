@@ -82,16 +82,15 @@ process.on("unhandledRejection", (err) => client.channels.get("47424543883762073
 client  .on('message', async function(message) {
 if(message.channel.type !== "text") return; 
 if(!message.content.startsWith(prefix)) return; 
-if(!message.content.startsWith(prefix)) return;
+if(message.author.bot) return;
+if(client.user.id === premium1.id && message.guild.id !== premium1.guild) return;
+if(!message.member.hasPermission("ADMINISTRATOR")){
+    cooldown.add(message.author.id);
+  }
 if(cooldown.has(message.author.id)){
     message.delete();
     return message.reply("You have to wait 5 seconds between commands.")
   }
-  if(!message.member.hasPermission("ADMINISTRATOR")){
-    cooldown.add(message.author.id);
-  }
-if(message.author.bot) return;
-if(message.guild.id !== premium1.guild) return;
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
