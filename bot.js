@@ -455,6 +455,14 @@ else if(message.content.startsWith(`${prefix}mute`)){
       user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`)
     }, ms(mutetime));
   }
+  else
+  if (message.content.startsWith(`${prefix}clear`)) {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Eh,You Don't Have Premission yo do that");
+  if(!args[0]) return message.channel.send("Please Provide a number to clear");
+  message.channel.bulkDelete(args[0]).then(() => {
+  message.channel.send(`Cleared ${args[0]} messages.<:megThumbs:475427359898599441>`).then(msg => msg.delete(2000));
+  })
+}
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === premium1.id) {
 if(message.content.startsWith(`${prefix}premium`)) {
