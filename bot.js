@@ -77,10 +77,11 @@ client.on("error", (error) => client.channels.get("474245438837620736").send(err
 process.on("unhandledRejection", (err) => client.channels.get("474245438837620736").send(`\`\`\`js\n${err}\`\`\` `))
 /////////////// Other Client Events //////////////////
 
-client.on('message', async function(message) {
+client  .on('message', async function(message) {
 if(message.channel.type !== "text") return; 
 if(!message.content.startsWith(prefix)) return; 
 if(message.author.bot) return;
+if(message.guild.id !== premium1.guild) return;
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
