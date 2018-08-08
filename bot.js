@@ -467,7 +467,7 @@ client.user.setUsername(args[1]).then(message.channel.send(`:ballot_box_with_che
 }
 if(args[0].startsWith("avatar")) {
 if(!args[1].match(/\.(jpeg|jpg|gif|png)$/)) return message.channel.send(`:x: The url you entered doesn't seems to be an image.`) 
-client.user.setAvatar(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot avatar to ${args[1]}`, {embed: {image: {url: args[1]}}})).catch(err => message.channel.send(`\`\`${err}\`\``))
+client.user.setAvatar(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot avatar to`, {embed: {image: {url: args[1]}}})).catch(err => message.channel.send(`\`\`${err}\`\``))
 }
 if(args[0].startsWith("status")) {
 let status;
