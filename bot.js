@@ -89,8 +89,8 @@ if(!message.member.hasPermission("ADMINISTRATOR")){
   }
 if(cooldown.has(message.author.id)){
     message.delete();
-    return message.reply("You have to wait 5 seconds between commands.")
-  }
+    return message.reply("You have to wait 5 seconds between commands.");
+  
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -490,6 +490,7 @@ else if(args[2] === '--streaming' && args[3].includes(`twitch.tv/`)) status = {t
 else status = {type: "PLAYING"} 
 client.user.setActivity(args[1], status).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot status to **${args[1]}** *--${status.type}*`)).catch(err => message.channel.send(`\`\`${err}\`\``))}}}
 ///////////////////////////////////////////////////////////////////
+}
 setTimeout(() => {
     cooldown.delete(message.author.id)
   }, cdseconds * 1000)
