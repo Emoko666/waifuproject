@@ -17,6 +17,8 @@ const wrong = "<:megWrong:476545382617186337>"
 const devs = ['431150885549113344','244423000802328576','343383616895713290','171259176029257728'];
 const errmsg = "<:eRrOr:475075170231517184> **Oops, something unexpected happened!** The error was sent to our team and we'll do our best to fix it."
 const prefix = '.'
+let cooldown = new Set();
+let cdseconds = 5;
 client.login(process.env.SECERT_TOKEN);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// Functions //////////////////
@@ -80,6 +82,14 @@ process.on("unhandledRejection", (err) => client.channels.get("47424543883762073
 client.on('message', async function(message) {
 if(message.channel.type !== "text") return; 
 if(!message.content.startsWith(prefix)) return; 
+if(!message.content.startsWith(prefix)) return;
+  if(cooldown.has(message.author.id)){
+    message.delete();
+    return message.reply("You have to wait 5 seconds between commands.")
+  }
+  if(!message.member.hasPermission("ADMINISTRATOR")){
+    cooldown.add(message.author.id);
+  }
 if(message.author.bot) return;
 let args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0]) || message.author
