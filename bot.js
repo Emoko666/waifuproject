@@ -60,17 +60,18 @@ usage: usage
 client.on("ready", () => {
 client.user.setActivity(".help | Soon..")
 client.channels.get("475028391473709068").send(`Megumi's bot is ready`)
-helpcmd(commands, "Hug", "user", "Action Commands", "Hugs the specified user.", `hug <@user | user username | user ID>`)
-helpcmd(commands, "Kiss", "user", "Action Commands", "Kisses the specified user.", `kiss <@user | user username | user ID>`)
-helpcmd(commands, "Slap", "user", "Action Commands", "Slaps the specified user.", `slap <@user | user username | user ID>`)
-helpcmd(commands, "Pat", "user", "Action Commands", "Pats the specified user.", `pat <@user | user username | user ID>`)
-helpcmd(commands, "Cuddle", "user", "Action Commands", "Cuddles the specified user.", `cuddle <@user | user username | user ID>`)
-helpcmd(commands, "Poke", "user", "Action Commands", "Pokes the specified user.", `poke <@user | user username | user ID>`)
-helpcmd(commands, "Tickle", "user", "Action Commands", "Tickles the specified user.", `tickle <@user | user username | user ID>`)
-helpcmd(commands, "Avatar", "user", "Info Commands", "Shows specified user avatar or your avatar.", `avatar [@user | user username | user ID]`)
-helpcmd(commands, "Server", "user", "Info Commands", "Shows server info.", `server`)
-helpcmd(commands, "Roles", "user", "Info Commands", "Shows list of the roles in current server.", `roles`)
-helpcmd(commands, "Ping", "user", "Info Commands", "Shows the bot pings.", `ping`)
+helpcmd(commands, "Hug", "all", "Action", "Hugs the specified user.", `hug <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Kiss", "all", "Action", "Kisses the specified user.", `kiss <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Slap", "all", "Action", "Slaps the specified user.", `slap <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Pat", "all", "Action", "Pats the specified user.", `pat <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Cuddle", "all", "Action", "Cuddles the specified user.", `cuddle <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Poke", "all", "Action", "Pokes the specified user.", `poke <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Tickle", "all", "Action", "Tickles the specified user.", `tickle <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Avatar", "all", "Info", "Shows specified user avatar or your avatar.", `avatar <@user / @user1 @user2 ...>`)
+helpcmd(commands, "Server", "all", "Info", "Shows server info.", `server`)
+helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current server.", `roles`)
+helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
+helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `ping`)
 })
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
@@ -119,7 +120,7 @@ if (message.content === `${prefix}help`) {
         }
     }
     message.channel.send({embed: {
-        description:`**${groups}**`,
+        description:`**${groups} Commands**`,
         title:"Groups",
         color: 0x1D82B6
     }})
