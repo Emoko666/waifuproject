@@ -196,6 +196,7 @@ if (message.content === `${prefix}help`) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWHug()
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** take a hug <3`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been hugged by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "hug"))
@@ -207,8 +208,8 @@ if(message.content.startsWith(`${prefix}kiss`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWKiss()
-    if(user.includes(message.author.username)) message.channel.send(`:cry: **${message.author.username}** here a kiss <3**`, {files: [img.url]})
-    message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been kissed by **${message.author.username}**`, {files: [img.url]
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** here a kiss <3`, {files: [img.url]})
+    else message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been kissed by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "kiss"))
 }
@@ -219,6 +220,7 @@ if(message.content.startsWith(`${prefix}slap`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWSlap()
+    if(user.includes(message.author.username)) return message.channel.send(`<:megErrOr:475075170231517184> **${message.author.username}** just slapped himself???`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been slapped by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "slap"))
@@ -230,6 +232,7 @@ if(message.content.startsWith(`${prefix}pat`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWPat()
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** here a pat <3`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been patted by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "pat"))
@@ -241,6 +244,7 @@ if(message.content.startsWith(`${prefix}cuddle`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWCuddle()
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** here a cuddle <3`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been cuddled by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "cuddle"))
@@ -252,6 +256,7 @@ if(message.content.startsWith(`${prefix}poke`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWPoke()
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** *pokes you*`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been poked by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "poke"))
@@ -263,6 +268,7 @@ if(message.content.startsWith(`${prefix}tickle`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWTickle()
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** *tickles you* <3`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been tickled by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "tickle"))
