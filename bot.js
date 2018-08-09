@@ -54,7 +54,7 @@ usage: usage
 }
 /////////////// Other Client Events //////////////////
 client.on("ready", () => {
-if(client.user.id === premium1.id) client.user.setActivity(client.user.username)
+if(client.user.id === premium1.id) client.user.setActivity("Nightcore", {type: "LISTENING"})
 else
 client.user.setActivity(".help | Soon..")
 client.channels.get("475028391473709068").send(`**[:large_blue_circle: READY]**\nUsers: **${client.users.size}** | Guilds: **${client.guilds.size}**`)
@@ -71,6 +71,7 @@ helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current se
 helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
 helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`)
 helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian | small-boobs | anal | pussy | wank]`)
+helpcmd(commands, "Mute", "all", "Moderation", "Mutes a memeber in text.", `mute <@user | userid | username> [time] [reason]`)
 })
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
@@ -195,6 +196,7 @@ if (message.content === `${prefix}help`) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWHug()
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** take a hug <3`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been hugged by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "hug"))
@@ -206,7 +208,8 @@ if(message.content.startsWith(`${prefix}kiss`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWKiss()
-    message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been kissed by **${message.author.username}**`, {files: [img.url]
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** here a kiss <3`, {files: [img.url]})
+    else message.channel.send(`**${user}** you have been kissed by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "kiss"))
 }
@@ -217,7 +220,8 @@ if(message.content.startsWith(`${prefix}slap`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWSlap()
-    message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been slapped by **${message.author.username}**`, {files: [img.url]
+    if(user.includes(message.author.username)) return message.channel.send(`<:megErrOr:475075170231517184> **${message.author.username}** just slapped himself???`, {files: [img.url]})
+    message.channel.send(`**${user}** you have been slapped by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "slap"))
 }
@@ -228,7 +232,8 @@ if(message.content.startsWith(`${prefix}pat`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWPat()
-    message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been patted by **${message.author.username}**`, {files: [img.url]
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** here a pat <3`, {files: [img.url]})
+    message.channel.send(`**${user}** you have been patted by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "pat"))
 }
@@ -239,7 +244,8 @@ if(message.content.startsWith(`${prefix}cuddle`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWCuddle()
-    message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been cuddled by **${message.author.username}**`, {files: [img.url]
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** here a cuddle <3`, {files: [img.url]})
+    message.channel.send(`**${user}** you have been cuddled by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "cuddle"))
 }
@@ -250,7 +256,8 @@ if(message.content.startsWith(`${prefix}poke`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWPoke()
-    message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been poked by **${message.author.username}**`, {files: [img.url]
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** *pokes you*`, {files: [img.url]})
+    message.channel.send(`**${user}** you have been poked by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "poke"))
 }
@@ -261,7 +268,8 @@ if(message.content.startsWith(`${prefix}tickle`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWTickle()
-    message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been tickled by **${message.author.username}**`, {files: [img.url]
+    if(user.includes(message.author.username)) return message.channel.send(`:cry: **${message.author.username}** *tickles you* <3`, {files: [img.url]})
+    message.channel.send(`**${user}** you have been tickled by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "tickle"))
 }
@@ -272,7 +280,7 @@ if(message.content.startsWith(`${prefix}tickle`)) {
 if(message.content.startsWith(`${prefix}nsfw`)) {
 let nsfwimg;
 const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
-const randomResponds = randomRespondsSetUp[Math.floor(Math.random * randomRespondsSetUp.length)]
+const randomResponds = randomRespondsSetUp[Math.floor(Math.random() * randomRespondsSetUp.length)]
 if(!message.channel.nsfw) return message.channel.send(`:x: The channel must be **NSFW**.\nMore info: **<https://goo.gl/4AViTc>**`)
 if(!args[0]) {
 nsfwimg = await neko.getNSFWRandomHentaiGif()
@@ -322,10 +330,6 @@ else if(args[0].toLowerCase().startsWith("wank")) {
 nsfwimg = await neko.getNSFWPussyWankGif()
 message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
 }
-else if(args[0].toLowerCase().startsWith("blowjob")) {
-nsfwimg = await neko.getNSFWBlowJob()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
 }
 
 //////////////////////////
@@ -334,6 +338,7 @@ message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errorm
 // Game Commands //
 
 if(message.content.startsWith(`${prefix}quiz`)) {
+return message.channel.send(`:wrench: We're working on this command!`);
 if(!args[0]) return message.channel.send(new RichEmbed()
 .setThumbnail("https://images-ext-2.discordapp.net/external/ixx9VwaXIvBi71wGahYe_NzG51gFQonnXVBl2eEbQmk/https/cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png")
 .setDescription(`**Pick one of these games!**\n**Anime** →	\`\`${prefix}quiz anime\`\` | A quiz about an anime character`)
@@ -344,11 +349,12 @@ else
     let i = 0;
     const animec = games.animec[Math.floor(Math.random() * games.animec.length)];
     message .channel.send(new RichEmbed() 
-    .setAuthor(message.author.username, message.author.avatarURL)
     .setDescription(`**Who is this character?**`)
-    .addField('Possibilities', (animec.trick).map(a => `${++i} ${a}`).join("\n"))
+    .setURL(animec.url)
+    .addField('Possibilities', (animec.trick).map(a => `\`\`${++i}.\`\` **${a}**`).join("\n"))
     .setThumbnail(animec.url)
-    .setFooter(`Timeouts in 10 seconds!`, "https://previews.123rf.com/images/siamimages/siamimages1602/siamimages160200865/51555582-time-clock-icon-illustration-sign-design.jpg")
+    .setColor("GOLD")
+    .setFooter(`Timeouts in 10 seconds!`, message.author.avatarURL)
     )
         try {
             var response = await message.channel.awaitMessages(msg2 => msg2.author.id === message.author.id, {
@@ -357,9 +363,9 @@ else
                 errors: ['time'],
             });
             } catch (error) {
-            return message.channel.send(`**:x: Timeout**`) 
+            return message.channel.send(`:x: Timeout\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`) 
             }
-    if(animec.answer.some(a => response.first().content === a)) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
+    if(animec.answer.some(a => response.first().content.includes(a))) return message.channel.send(`${correct} **${message.author.username}** correct answer!`)
     else return message.channel.send(`${wrong} **${message.author.username}** better luck next time!\n:arrow_right: Correct answer: **${(animec.answer).join(", ")}**`);
         } 
 }
@@ -415,27 +421,39 @@ else if(message.content.startsWith(`${prefix}mute`)){
     user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
     let reason = args[2]
     if(!reason) reason = "Unspecified"
-    if(!user) return message.reply(":x: Couldn't find user.");
-    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You Don't Have Permission");
-    if(user.hasPermission("MANAGE_MESSAGES")) return message.reply(":x: Can't mute them!");
-    let muterole = message.guild.roles.find(`name`, "Muted")
-    if(user.roles.has(muterole.id)) return message.channel.send(`:x: **${user.user.username}** is already muted.`)
-    if(!muterole) message.guild.createRole({
-        name: "Muted", 
-        color: 'BLACK', 
-        permissions: [""],
-        mentionable: false
-    })
+    if(!user) return message.channel.send(":x: Couldn't find user.");
+    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You don't have permission to do that.");
+    if(user.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: Seems you can't mute them.");
+    let muterole = message.guild.roles.find(r => r.name === "Muted")
+    if(!muterole) {
+        try {
+            muterole = await message.guild.createRole({
+                name: "Muted", 
+                color: 0x000000, 
+                permissions: [],
+                mentionable: false
+            });
+            message.guild.channels.forEach(async (channel, id) => {
+                await channel.overwritePermissions(muterole, {
+                    SEND_MESSAGES: false, 
+                    ADD_REACTIONS: false
+                });
+            })
+        } catch (e) {
+        errormsg(message, err, "mute")
+        }
+    }
+    if(user.roles.has(muterole.id)) return message.channel.send(`:x: **${user.user.username}** is already muted.`);
     let mutetime = args[1];
-    if(!mutetime){
-        user.addRole(muterole.id)
-        message.channel.send(`:zipper_mouth: **${user.user.username}** has been muted. because '**${reason}**'.`)
-        user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`)
+    if(!mutetime) {
+        await user.addRole(muterole)
+        message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** has been muted. because '**${reason}**'.`)
+        user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`).catch(err => console.log(err));
     } 
     else
-    (user.addRole(muterole.id));
-    message.channel.send(`:zipper_mouth: **${user.user.username}** has been muted for **${ms(ms(mutetime))}**. because '**${reason}**'`);
-    user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`, {embed:{
+    (user.addRole(muterole));
+    message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** has been muted for **${ms(ms(mutetime))}**. because '**${reason}**'`);
+    user.send(`You've been muted in **${message.guild.name}** for: **${reason}**`, {embed: {
         fields: [
             {
                 name: "Duration",
@@ -447,21 +465,32 @@ else if(message.content.startsWith(`${prefix}mute`)){
                 inline: true
             }
         ]
-    }})
+    }}).catch(err => console.log(err))
     setTimeout(function(){
-      user.removeRole(muterole.id);
+      user.removeRole(muterole);
       message.channel.send(`<:waifuThumbs:475427359898599441> **${user.user.username}** is no longer muted.`);
-      user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`)
+      user.send(`<:waifuThumbs:475427359898599441> You are no longer muted in **${message.guild.name}**.`).catch(err => console.log(err))
     }, ms(mutetime));
   }
-  else
-  if (message.content.startsWith(`${prefix}clear`)) {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
-  if(!args[0]) return message.channel.send(":x: Please specify the number of messages to clear!");
-  message.channel.bulkDelete(args[0]).then(() => {
-  message.channel.send(`<:megThumbs:475427359898599441> Cleared **${args[0]}** messages.`).then(msg => msg.delete(2000));
-  })
+
+else if(message.content.startsWith(`${prefix}unmute`)) {
+let muterole = message.guild.roles.find(r => r.name === "Muted")
+user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
+if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(`:x: You don't have permission to do that.`)
+if(!user) return message.channel.send(`:x: Couldn't find user.`)
+if(!user.roles.has(muterole.id)) return message.channel.send(`:x: **${user.user.username}** isn't muted!`)
+await user.removeRole(muterole); 
+message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** is now unmuted.`)
 }
+
+else if (message.content.startsWith(`${prefix}clear`)) {
+await message.delete();
+if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
+if(!args[0] || isNaN(args)) return message.channel.send(":x: Please specify the number of messages to clear!");
+const messages = await message.channel.fetchMessages({limit: args[0]});
+message.channel.bulkDelete(messages).catch(err => errormsg(message, err, "clear")).then(()=> message.channel.send(`<:megThumbs:475427359898599441> Cleared **${messages.size}** messages.`).then(msg => msg.delete(3000)));
+}
+
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === premium1.owner) {
 if(message.content.startsWith(`${prefix}premium`)) {
@@ -490,4 +519,3 @@ fs.writeFile("./commands.json", JSON.stringify(commands), (err) => {
     if (err) console.error(err)
   });
 });
-
