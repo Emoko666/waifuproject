@@ -207,6 +207,7 @@ if(message.content.startsWith(`${prefix}kiss`)) {
     user = message.mentions.members.map(m => m.user.username)
     if(message.mentions.members.size > 1) user = message.mentions.members.map(m => m.user.username).join(",")
     const img = await neko.getSFWKiss()
+    if(user.includes(message.author.username)) message.channel.send(`:cry: **${message.author.username}** here a kiss <3**`, {files: [img.url]})
     message.channel.send(`<:waifuHug:475072567137533953> **${user}** you have been kissed by **${message.author.username}**`, {files: [img.url]
     /////////////////////////////////////////////////////////////
     }).catch(err => errormsg(message, err, "kiss"))
