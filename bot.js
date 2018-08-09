@@ -71,6 +71,7 @@ helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current se
 helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
 helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`)
 helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian | small-boobs | anal | pussy | wank]`)
+helpcmd(commands, "Mute", "all", "Moderation", "Mutes a memeber in text.", `mute <@user | userid | username> [time] [reason]`)
 })
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
@@ -469,7 +470,8 @@ else if(message.content.startsWith(`${prefix}unmute`)) {
 let muterole = message.guild.roles.find(r => r.name === "Muted")
 user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
 if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(`:x: You don't have permission to do that.`)
-if(!user.roles.has(muterole)) return message.channel.send(`:x: **${user.user.username}** isn't muted!`)
+if(!user) return message.channel.send(`:x: Couldn't find user.`)
+if(!user.roles.has(muterole.id)) return message.channel.send(`:x: **${user.user.username}** isn't muted!`)
 await user.removeRole(muterole); 
 message.channel.send(`<:megThumbs:475427359898599441> **${user.user.username}** is now unmuted.`)
 }
