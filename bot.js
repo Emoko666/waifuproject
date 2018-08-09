@@ -279,7 +279,7 @@ if(message.content.startsWith(`${prefix}tickle`)) {
 
 if(message.content.startsWith(`${prefix}nsfw`)) {
 let nsfwimg;
-const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
+const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go** :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
 const randomResponds = randomRespondsSetUp[Math.floor(Math.random() * randomRespondsSetUp.length)]
 if(!message.channel.nsfw) return message.channel.send(`:x: The channel must be **NSFW**.\nMore info: **<https://goo.gl/4AViTc>**`)
 if(!args[0]) {
