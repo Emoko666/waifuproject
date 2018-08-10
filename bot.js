@@ -1,5 +1,4 @@
 const { Client, RichEmbed } = require('discord.js');
-const hook = new Discord.WebhookClient('477585127803846666', 'bEEqUpvsBkk-fmWVUNT9GylKp9Fh-uJmt9d3iksnPKX3L034JG_t1NfeI1YFfKo5H0m1');
 const fs = require("fs");
 const { premium1 } = require("./data/premium") 
 const ms = require('ms');
@@ -53,7 +52,6 @@ desc: desc,
 usage: usage
 }
 }
-hook.send('Im Ready!')
 /////////////// Other Client Events //////////////////
 client.on("ready", () => {
 if(client.user.id === premium1.id) client.user.setActivity(client.user.username)
