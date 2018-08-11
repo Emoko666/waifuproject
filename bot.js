@@ -483,7 +483,7 @@ if (message.content.startsWith(`${prefix}ban`)) {
     let bReason = args.join(" ").slice(22);
     if(!bReason) bReason = "Unspecified"
 
-    let banEmbed = new Discord.RichEmbed()
+    let banEmbed = new RichEmbed()
     .setDescription("~Ban~")
     .setColor("RED")
     .addField("Banned User", `${bUser} with ID ${bUser.id}`)
