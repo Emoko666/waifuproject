@@ -496,7 +496,7 @@ if (message.content.startsWith(`${prefix}ban`)) {
     if(!logs) return message.channel.send("Can't find logs channel.");
 
     message.guild.member(bUser).ban(bReason);
-    message.channel(`<:Bhammer:477954190384168975> ${bUser} got banned by <@${message.author.id} `)
+    message.channel.send(`<:Bhammer:477954190384168975> ${bUser} got banned by <@${message.author.id} `)
     logs.send(banEmbed);
 }
 ///////////////////////////////PREMIUM////////////////////////////////////
