@@ -480,7 +480,6 @@ if (message.content.startsWith(`${prefix}ban`)) {
     }
     let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!bUser) return message.reply(":x: Couldn't find user.");
-    if(!client.hasPermission('BAN_MEMBERS')) return message.reply(':x: Missing premission')
     let bReason = args.join(" ").slice(22);
     if(!bReason) bReason = "Unspecified"
 
