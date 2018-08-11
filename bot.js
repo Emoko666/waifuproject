@@ -412,6 +412,10 @@ message.channel.send(`**Shutting down....**`).then(client.destroy())
 }
 
 else if(message.content.startsWith(`${prefix}mute`)){
+    if(args[0] == "help"){
+        message.reply(`Usage: ${prefix}mute <user> <mutetime> <reason>`);
+        return;
+      }
     user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
     let reason = args[2]
     if(!reason) reason = "Unspecified"
@@ -456,11 +460,45 @@ else if(message.content.startsWith(`${prefix}mute`)){
   }
   else
   if (message.content.startsWith(`${prefix}clear`)) {
+    if(args[0] == "help"){
+        message.reply(`Usage: ${prefix}clear <amount>`);
+        return;
+      }
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
   if(!args[0]) return message.channel.send(":x: Please specify the number of messages to clear!");
   message.channel.bulkDelete(args[0]).then(() => {
   message.channel.send(`<:megThumbs:475427359898599441> Cleared **${args[0]}** messages.`).then(msg => msg.delete(2000));
   })
+}
+else
+if (message.content.startsWith(`${prefix}ban`)) {
+    message.delete();
+    if(!message.member.hasPermission("BAN_MEMBERS")) return errors.noPerms(message, "BAN_MEMBERS");
+    if(args[0] == "help"){
+      message.reply(`Usage: ${prefix}ban <user> <reason>`);
+      return;
+    }
+    let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!bUser) return message.reply(":x: Couldn't find user.");
+    if(bUser.id === bot.user.id) return messag.reply(":x: you can't ban bot")
+    let bReason = args.join(" ").slice(22);
+    if(!bReason) bReason = "Unspecified"
+
+    let banEmbed = new Discord.RichEmbed()
+    .setDescription("~Ban~")
+    .setColor("#bc0000")
+    .addField("Banned User", `${bUser} with ID ${bUser.id}`)
+    .addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
+    .addField("Banned In", message.channel)
+    .addField("Time", message.createdAt)
+    .addField("Reason", bReason);
+
+    let logs = message.guild.channels.find(`name`, "logs");
+    if(!logs) return message.channel.send("Can't find logs channel.");
+
+    message.guild.member(bUser).ban(bReason);
+    message.channel(`<:Bhammer:477954190384168975> ${bUser} got banned by <@${message.author.id} `)
+    logs.send(banEmbed);
 }
 ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === premium1.owner) {
