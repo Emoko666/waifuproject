@@ -480,6 +480,7 @@ if (message.content.startsWith(`${prefix}ban`)) {
     }
     let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!bUser) return message.reply(":x: Couldn't find user.");
+    if(bUser.hasPermission('BAN_MEMBERS')) return message.reply("you can't ban a moderator");
     let bReason = args.join(" ").slice(22);
     if(!bReason) bReason = "Unspecified"
 
@@ -497,7 +498,6 @@ if (message.content.startsWith(`${prefix}ban`)) {
 
     message.guild.member(bUser).ban(bReason);
     message.channel.send(`**<:Bhammer:477954190384168975> ${bUser} got banned by <@${message.author.id}> **`)
-    message.bUser.sendMessage(`you've been banned from ${message.guild.name} \n Reason "${bReason}"`)
     logs.send(banEmbed);
 }
 ///////////////////////////////PREMIUM////////////////////////////////////
