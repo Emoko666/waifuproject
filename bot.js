@@ -473,7 +473,7 @@ else if(message.content.startsWith(`${prefix}mute`)){
 else
 if (message.content.startsWith(`${prefix}ban`)) {
     message.delete();
-    if(!message.member.hasPermission("BAN_MEMBERS")) return errors.noPerms(message, "BAN_MEMBERS");
+    if(!message.member.hasPermission("BAN_MEMBERS")) return message.reply(":x: you don't have premission to that!")
     if(args[0] == "help"){
       message.reply(`Usage: ${prefix}ban <user> <reason>`);
       return;
