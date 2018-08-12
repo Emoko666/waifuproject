@@ -413,17 +413,17 @@ message.channel.send(`**Shutting down....**`).then(client.destroy())
 
 else if(message.content.startsWith(`${prefix}mute`)){
     if(args[0] == "help"){
-        message.reply(`Usage: ${prefix}mute <user> <mutetime> <reason>`);
+        message.channel.send(`Usage: ${prefix}mute <user> <mutetime> <reason>`);
         return;
       }
     user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.displayName === args[0])
     let reason = args[2]
     if(!reason) reason = "Unspecified"
-    if(!user) return message.reply(":x: Couldn't find user.");
-    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(":x: You Don't Have Permission");
-    if(user.hasPermission("MANAGE_MESSAGES")) return message.reply(":x: Can't mute them!");
+    if(!user) return message.reply("<:megWrong:476545382617186337> Couldn't find user.");
+    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send("<:megWrong:476545382617186337> You Don't Have Permission");
+    if(user.hasPermission("MANAGE_MESSAGES")) return message.reply("<:megWrong:476545382617186337> Can't mute them!");
     let muterole = message.guild.roles.find(`name`, "Muted")
-    if(user.roles.has(muterole.id)) return message.channel.send(`:x: **${user.user.username}** is already muted.`)
+    if(user.roles.has(muterole.id)) return message.channel.send(`<:megWrong:476545382617186337> **${user.user.username}** is already muted.`)
     if(!muterole) message.guild.createRole({
         name: "Muted", 
         color: 'BLACK', 
@@ -461,11 +461,11 @@ else if(message.content.startsWith(`${prefix}mute`)){
   else
   if (message.content.startsWith(`${prefix}clear`)) {
     if(args[0] == "help"){
-        message.reply(`Usage: ${prefix}clear <amount>`);
+        message.channel.send(`Usage: ${prefix}clear <amount>`);
         return;
       }
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You don't have permissions to clear messages.");
-  if(!args[0]) return message.channel.send(":x: Please specify the number of messages to clear!");
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("<:megWrong:476545382617186337> You don't have permissions to clear messages.");
+  if(!args[0]) return message.channel.send("<:megWrong:476545382617186337> Please specify the number of messages to clear!");
   message.channel.bulkDelete(args[0]).then(() => {
   message.channel.send(`<:megThumbs:475427359898599441> Cleared **${args[0]}** messages.`).then(msg => msg.delete(2000));
   })
@@ -473,14 +473,14 @@ else if(message.content.startsWith(`${prefix}mute`)){
 else
 if (message.content.startsWith(`${prefix}ban`)) {
     message.delete();
-    if(!message.member.hasPermission("BAN_MEMBERS")) return message.reply(":x: you don't have premission to that!")
+    if(!message.member.hasPermission("BAN_MEMBERS")) return message.reply("<:megWrong:476545382617186337> you don't have premission to that!")
     if(args[0] == "help"){
-      message.reply(`Usage: ${prefix}ban <user> <reason>`);
+      message.channel.send(`Usage: ${prefix}ban <user> <reason>`);
       return;
     }
     let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!bUser) return message.reply(":x: Couldn't find user.");
-    if(bUser.hasPermission('BAN_MEMBERS')) return message.reply("you can't ban a moderator");
+    if(!bUser) return message.reply("<:megWrong:476545382617186337> Couldn't find user.");
+    if(bUser.hasPermission('BAN_MEMBERS')) return message.channel.send("<:megWrong:476545382617186337> you can't ban a moderator");
     let bReason = args.join(" ").slice(22);
     if(!bReason) bReason = "Unspecified"
 
@@ -494,7 +494,7 @@ if (message.content.startsWith(`${prefix}ban`)) {
     .addField("Reason", bReason);
 
     let logs = message.guild.channels.find(`name`, "logs");
-    if(!logs) return message.channel.send("Can't find logs channel.");
+    if(!logs) return message.channel.send("<:megWrong:476545382617186337> Can't find logs channel.");
 
     message.guild.member(bUser).ban(bReason);
     message.channel.send(`**<:Bhammer:477954190384168975> ${bUser} got banned by <@${message.author.id}> **`)
