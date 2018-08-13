@@ -69,7 +69,7 @@ helpcmd(commands, "Avatar", "all", "Info", "Shows specified user avatar or your 
 helpcmd(commands, "Server", "all", "Info", "Shows server info.", `server`)
 helpcmd(commands, "Ban", "all", "Action", "Bans the specified user", `ban <@user> <reason>`)
 helpcmd(commands, "Kick", "all", "Action", "Kicks the specified user", `kick <@user> <reason>`)
-helpcmd(commands, "Clear", "all", "Action", "Clears the specified number of messages", `clear <amountr>`)
+helpcmd(commands, "Clear", "all", "Action", "Clears the specified number of messages", `clear <amount>`)
 helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current server.", `roles`)
 helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
 helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`)
