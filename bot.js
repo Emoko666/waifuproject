@@ -524,7 +524,7 @@ if(message.content.startsWith(`${prefix}kick`)) {
     if(!logs) return message.channel.send("<:megWrong:476545382617186337> Can't find logs channel.");
 
     message.guild.member(kUser).kick(kReason);
-    message.channel.send(`**<:Bhammer:477954190384168975 ${kUser} got banned by <@${message.author.id}>**
+    message.channel.send(`**<:Bhammer:477954190384168975> ${kUser} got banned by <@${message.author.id}>**
     **__Reason__** : **${kReason}**`)
     logs.send(kickEmbed);
 
