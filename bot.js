@@ -67,9 +67,13 @@ helpcmd(commands, "Poke", "all", "Action", "Pokes the specified user.", `poke <@
 helpcmd(commands, "Tickle", "all", "Action", "Tickles the specified user.", `tickle <@user / @user1 @user2 ...>`)
 helpcmd(commands, "Avatar", "all", "Info", "Shows specified user avatar or your avatar.", `avatar <@user / @user1 @user2 ...>`)
 helpcmd(commands, "Server", "all", "Info", "Shows server info.", `server`)
+helpcmd(commands, "Ban", "all", "Action", "Bans the specified user", `ban <@user> <reason>`)
+helpcmd(commands, "Kick", "all", "Action", "Kicks the specified user", `kick <@user> <reason>`)
+helpcmd(commands, "Clear", "all", "Action", "Clears the specified number of messages", `clear <amountr>`)
 helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current server.", `roles`)
 helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
 helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`)
+
 helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian | small-boobs | anal | pussy | wank]`)
 })
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
