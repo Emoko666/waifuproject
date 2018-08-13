@@ -472,7 +472,6 @@ else if(message.content.startsWith(`${prefix}mute`)){
 }
 else
 if (message.content.startsWith(`${prefix}ban`)) {
-    message.delete();
     if(!message.member.hasPermission("BAN_MEMBERS")) return message.reply("<:megWrong:476545382617186337> you don't have premission to that!")
     if(args[0] == "help"){
       message.channel.send(`Usage: ${prefix}ban <user> <reason>`);
@@ -500,7 +499,37 @@ if (message.content.startsWith(`${prefix}ban`)) {
     message.channel.send(`**<:Bhammer:477954190384168975> ${bUser} got banned by <@${message.author.id}> **`)
     logs.send(banEmbed);
 }
-///////////////////////////////PREMIUM////////////////////////////////////
+else 
+if(message.content.startsWith(`${prefix}kick`)) {
+    if(!message.member.hasPermission('KICK_MEMBERS')) return message.reply("<:megWrong:476545382617186337> you don't have premission to that!");
+    if(args[0] == "help"){
+        message.channel.send(`Usage ${prefix}kick <user> <reason>`);
+        return;
+    }
+    let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!kUser) return message.reply("<:megWrong:476545382617186337> Couldn't find user.");
+    if(kUser.hasPermission('KICK_MEMBERS')) return message.reply("<:megWrong:476545382617186337> you can't kick moderator ")
+    let kReason = args.join(" ").slice(22);
+    if(!kReason) kReason = "Unspecified"
+    let kickEmbed = new RichEmbed()
+    .setTitle("~Kick~")
+    .setColor("RED")
+    .addField("Kicked User", `${kUser} With ID ${kUser.id}`)
+    .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
+    .addField("Kicked In", message.channel)
+    .addField("Time", message.createdAt)
+    .addField("Reason", kReason);
+
+    let logs = message.guild.channels.find(`name`, "logs");
+    if(!logs) return message.channel.send("<:megWrong:476545382617186337> Can't find logs channel.");
+
+    message.guild.member(kUser).kick(kReason);
+    message.channel.send(`**<:Bhammer:477954190384168975 ${kUser} got banned by <@${message.author.id}>**
+    **__Reason__** : **${kReason}**`)
+    logs.send(kickEmbed);
+
+}
+    ///////////////////////////////PREMIUM////////////////////////////////////
 if(client.user.id === premium1.id && message.author.id === premium1.owner) {
 if(message.content.startsWith(`${prefix}premium`)) {
 if(!args[0]) return message.channel.send(`:star: Megium Premium :star:\n\n**❯ Premium Username** \`\`${prefix}premium username <new username>\`\`\n**❯ Premium Avatar** \`\`${prefix}premium avatar <new avatar image>\`\`\n**❯ Premium Status** \`\`${prefix}premium status <new status>\`\`\n\nPremium Owner: **${client.users.get(premium1.owner).tag}** | Premium Key: **${premium1.key}** | Premium Period: **Lifetime**`)
