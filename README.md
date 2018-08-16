@@ -1,2 +1,2 @@
 # waifu project
-[Old version!! switch to alpha branch.]
+## Old version!! switch to alpha branch.
