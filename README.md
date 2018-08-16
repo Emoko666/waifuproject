@@ -1,9 +1,2 @@
 # waifu project
-To do list:
-- Command Handler, Event Handler.
--
--
--
--
--
--
+** Old version!!** switch to alpha branch.
