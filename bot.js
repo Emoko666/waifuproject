@@ -273,6 +273,7 @@ if(message.content.startsWith(`${prefix}tickle`)) {
 // NSFW Commands //
 
 if(message.content.startsWith(`${prefix}nsfw`)) {
+return message.channel.send(`:x: Something went wrong. It seems like an api error!`)
 let nsfwimg;
 const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
 const randomResponds = randomRespondsSetUp[Math.floor(Math.random * randomRespondsSetUp.length)]
