@@ -14,7 +14,7 @@ const games = JSON.parse(fs.readFileSync('./data/games.json', "utf8"))
 const commands = JSON.parse(fs.readFileSync("./data/commands.json", "utf8"));
 const correct = "<:megCorrect:476545535348834324>"
 const wrong = "<:megWrong:476545382617186337>"
-const devs = ['431150885549113344','244423000802328576','343383616895713290','171259176029257728'];
+const devs = ['171259176029257728'];
 const errmsg = "<:eRrOr:475075170231517184> **Oops, something unexpected happened!** The error was sent to our team and we'll do our best to fix it."
 const prefix = '.'
 client.login(process.env.SECERT_TOKEN);
@@ -54,9 +54,7 @@ usage: usage
 }
 /////////////// Other Client Events //////////////////
 client.on("ready", () => {
-if(client.user.id === premium1.id) client.user.setActivity(client.user.username)
-else
-client.user.setActivity(".help | Soon..")
+client.user.setActivity(client.user.username)
 client.channels.get('474592549064015882').send(`**[:large_blue_circle: READY]**\nUsers: **${client.users.size}** | Guilds: **${client.guilds.size}**`)
 helpcmd(commands, "Hug", "all", "Action", "Hugs the specified user.", `hug <@user / @user1 @user2 ...>`)
 helpcmd(commands, "Kiss", "all", "Action", "Kisses the specified user.", `kiss <@user / @user1 @user2 ...>`)
@@ -73,8 +71,8 @@ helpcmd(commands, "Clear", "all", "Action", "Clears the specified number of mess
 helpcmd(commands, "Roles", "all", "Info", "Shows list of the roles in current server.", `roles`)
 helpcmd(commands, "Ping", "all", "Info", "Shows the bot pings.", `ping`)
 helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`)
-
-helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian | small-boobs | anal | pussy | wank]`)
+//? helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian | small-boobs | anal | pussy | wank]`)
+helpcmd(commands, "NSFW", "all", "Image", "N/A", `N/A`)
 })
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
