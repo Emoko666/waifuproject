@@ -274,62 +274,63 @@ if(message.content.startsWith(`${prefix}tickle`)) {
 
 if(message.content.startsWith(`${prefix}nsfw`)) {
 return message.channel.send(`:x: Something went wrong. It seems like an api error!`)
-let nsfwimg;
-const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
-const randomResponds = randomRespondsSetUp[Math.floor(Math.random * randomRespondsSetUp.length)]
-if(!message.channel.nsfw) return message.channel.send(`:x: The channel must be **NSFW**.\nMore info: **<https://goo.gl/4AViTc>**`)
-if(!args[0]) {
-nsfwimg = await neko.getNSFWRandomHentaiGif()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-return;
-} else if(args[0].toLowerCase().startsWith("pussy")) {
-nsfwimg = await neko.getNSFWPussy()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("neko")) {
-nsfwimg = await neko.getNSFWNekoGif()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("lesbian")) {
-nsfwimg = await neko.getNSFWLesbian()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("kuni")) {
-nsfwimg = await neko.getNSFWKuni()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("cumslut")) {
-nsfwimg = await neko.getNSFWCumsluts()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("boobs")) {
-nsfwimg = await neko.getNSFWBoobs()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("bj")) {
-nsfwimg = await neko.getNSFWBJ()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("anal")) {
-nsfwimg = await neko.getNSFWAnal()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("yuri")) {
-nsfwimg = await neko.getNSFWEroYuri()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("small-boobs")) {
-nsfwimg = await neko.getNSFWSmallBoobs()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("wank")) {
-nsfwimg = await neko.getNSFWPussyWankGif()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
-else if(args[0].toLowerCase().startsWith("blowjob")) {
-nsfwimg = await neko.getNSFWBlowJob()
-message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
-}
+//? Deleted NSFW Commands!
+// let nsfwimg;
+// const randomRespondsSetUp = [":heart_eyes: Wow!", "**Here you go :point_right: :ok_hand:", "DON'T GET **HORNY**!!!"]
+// const randomResponds = randomRespondsSetUp[Math.floor(Math.random * randomRespondsSetUp.length)]
+// if(!message.channel.nsfw) return message.channel.send(`:x: The channel must be **NSFW**.\nMore info: **<https://goo.gl/4AViTc>**`)
+// if(!args[0]) {
+// nsfwimg = await neko.getNSFWRandomHentaiGif()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// return;
+// } else if(args[0].toLowerCase().startsWith("pussy")) {
+// nsfwimg = await neko.getNSFWPussy()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("neko")) {
+// nsfwimg = await neko.getNSFWNekoGif()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("lesbian")) {
+// nsfwimg = await neko.getNSFWLesbian()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("kuni")) {
+// nsfwimg = await neko.getNSFWKuni()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("cumslut")) {
+// nsfwimg = await neko.getNSFWCumsluts()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("boobs")) {
+// nsfwimg = await neko.getNSFWBoobs()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("bj")) {
+// nsfwimg = await neko.getNSFWBJ()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("anal")) {
+// nsfwimg = await neko.getNSFWAnal()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("yuri")) {
+// nsfwimg = await neko.getNSFWEroYuri()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("small-boobs")) {
+// nsfwimg = await neko.getNSFWSmallBoobs()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("wank")) {
+// nsfwimg = await neko.getNSFWPussyWankGif()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
+// else if(args[0].toLowerCase().startsWith("blowjob")) {
+// nsfwimg = await neko.getNSFWBlowJob()
+// message.channel.send(randomResponds, {files: [nsfwimg.url]}).catch(err => errormsg(message, err, "nsfw"))
+// }
 }
 
 //////////////////////////
