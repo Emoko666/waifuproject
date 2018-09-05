@@ -77,6 +77,10 @@ helpcmd(commands, "NSFW", "all", "Image", "N/A", `N/A`)
 client.on("error", (error) => client.channels.get("474245438837620736").send(error))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
 process.on("unhandledRejection", (err) => client.channels.get("474245438837620736").send(`\`\`\`js\n${err}\`\`\` `))
+client.on('guildMemberAdd', memeber => {
+    if(memeber.guild.id === premium1.id) {
+    memeber.guild.channels.get("347377586017665027").send(`O New Pal ${memeber} jumped in メ NightCorePals メ ! Welcome :Wave: have a fun time here ^^`, {files: ["https://i.imgur.com/kfQDwer.jpg"]})
+}})
 /////////////// Other Client Events //////////////////
 client.on('message', async function(message) {
 if(message.channel.type !== "text") return; 
