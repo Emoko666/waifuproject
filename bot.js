@@ -92,6 +92,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     embed.setTimestamp();
     client.channels.get("487593558195437588").send(embed)
 })
+
 client.on('guildBanAdd', async (guild, user) => {
   const logs = await guild.fetchAuditLogs({ 
       type: 22,
@@ -100,14 +101,59 @@ client.on('guildBanAdd', async (guild, user) => {
   const banner = logs.entries.first().executor
   const reason = logs.entries.first().reason || "*Not specified*"
   const embed = new RichEmbed()
-  embed.setAuthor(`${banner.username} (${banner.username})`, banner.avatarURL)
+  embed.setAuthor(`${banner.username} (${banner.id})`, banner.avatarURL)
   embed.setDescription(`Action: **Member Banned**`)
   embed.setColor("RED")
-  embed.addField(`Member banned`, user)
-  embed.addField(`Reason`, reason)
+  embed.addField(`Member banned`, user, true)
+  embed.addField(`Reason`, reason, true)
   embed.setTimestamp();
   client.channels.get("487593558195437588").send(embed)
 })
+
+client.on('messageDelete', (message) => {
+  const embed = new RichEmbed()
+  embed.setAuthor(`${message.author.username} (${message.author.id})`, message.author.avatarURL)
+  embed.setDescription(`Action: **Message Delete**`)
+  embed.setColor("YELLOW")
+  embed.addField(`Message Content`, message.content, true)
+  embed.addField(`Message ID`, message.id, true)
+  embed.setTimestamp();
+  client.channels.get("487593558195437588").send(embed)
+})
+
+
+client.on('guildMemberAdd', (member) => {
+  const embed = new RichEmbed()
+  embed.setAuthor(`${member.displayName} (${member.id})`, member.user.avatarURL)
+  embed.setDescription(`Action: **User joined**`)
+  embed.setColor("GREEN")
+  embed.setTimestamp();
+  client.channels.get("487593558195437588").send(embed)
+})
+
+client.on('guildMemberRemove', (member) => {
+  const checker = Date.now()
+  const logs = await member.guild.fetchAuditLogs({
+      type: 20, 
+      user: member.user,
+  })
+  let log = {
+      kicker: logs.entries.first().executor,
+      reason: logs.entries.first().reason,
+  }
+  if(logs.entries.first().createdTimestamp <= checker-5000) log = undefined; 
+  const embed = new RichEmbed()
+  embed.setAuthor(`${member.displayName} (${member.id})`, member.user.avatarURL)
+  embed.setDescription(`Action: **User left**`)
+  if(log) {
+      embed.addField(`Kicker`, log.kicker, true);
+      embed.addField(`Reason`, log.reason, true)
+  }
+  embed.setColor("RED")
+  embed.setTimestamp();
+  client.channels.get("487593558195437588").send(embed)
+})
+
 /////////////// Other Client Events //////////////////
 client.on('message', async function(message) {
 if(message.channel.type !== "text") return; 
