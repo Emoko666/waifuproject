@@ -131,7 +131,7 @@ client.on('guildMemberAdd', (member) => {
   client.channels.get("487593558195437588").send(embed)
 })
 
-client.on('guildMemberRemove', (member) => {
+client.on('guildMemberRemove', async (member) => {
   const checker = Date.now()
   const logs = await member.guild.fetchAuditLogs({
       type: 20, 
