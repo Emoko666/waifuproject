@@ -86,10 +86,27 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     const embed = new RichEmbed()
     embed.setAuthor(`${oldMessage.member.displayName} (${oldMessage.member.id})`, oldMessage.member.user.avatarURL)
     embed.setDescription(`Action: **Message Update**`)
-    if(oldMessage) embed.addField(`Old Message`, oldMessage.content, true)
-    if(newMessage) embed.addField(`New Message`, newMessage.content, true)
+    embed.setColor("GREEN")
+    if(oldMessage.content) embed.addField(`Old Message`, oldMessage.content, true)
+    if(newMessage.content) embed.addField(`New Message`, newMessage.content, true)
     embed.setTimestamp();
     client.channels.get("487593558195437588").send(embed)
+})
+client.on('guildBanAdd', async (guild, user) => {
+  const logs = await guild.fetchAuditLogs({ 
+      type: 22,
+      user: user
+  })
+  const banner = logs.entries.first().executor
+  const reason = logs.entries.first().reason || "*Not specified*"
+  const embed = new RichEmbed()
+  embed.setAuthor(`${banner.username} (${banner.username})`, banner.avatarURL)
+  embed.setDescription(`Action: **Member Banned**`)
+  embed.setColor("RED")
+  embed.addField(`Member banned`, user)
+  embed.addField(`Reason`, reason)
+  embed.setTimestamp();
+  client.channels.get("487593558195437588").send(embed)
 })
 /////////////// Other Client Events //////////////////
 client.on('message', async function(message) {
