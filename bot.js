@@ -86,8 +86,8 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     const embed = new RichEmbed()
     embed.setAuthor(`${oldMessage.member.displayName} (${oldMessage.member.id})`, oldMessage.member.user.avatarURL)
     embed.setDescription(`Action: **Message Update**`)
-    embed.addField(`Old Message`, oldMessage.content, true)
-    embed.addField(`New Message`, newMessage.content, true)
+    if(oldMessage) embed.addField(`Old Message`, oldMessage.content, true)
+    if(newMessage) embed.addField(`New Message`, newMessage.content, true)
     embed.setTimestamp();
     client.channels.get("487593558195437588").send(embed)
 })
