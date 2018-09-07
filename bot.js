@@ -94,10 +94,10 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 })
 
 client.on('guildBanAdd', async (guild, user) => {
-  const logs = await guild.fetchAuditLogs({ 
+  const logx = await guild.fetchAuditLogs({ 
       type: 22,
-      user: user
   })
+  const logs = logx.entries.find(m => m.target === user); 
   const banner = logs.entries.first().executor
   const reason = logs.entries.first().reason || "*Not specified*"
   const embed = new RichEmbed()
@@ -133,10 +133,11 @@ client.on('guildMemberAdd', (member) => {
 
 client.on('guildMemberRemove', async (member) => {
   const checker = Date.now()
-  const logs = await member.guild.fetchAuditLogs({
+  const logx = await member.guild.fetchAuditLogs({
       type: 20, 
       user: member.user,
   })
+  const logs = logx.entries.find(m => m.target === user); 
   let log = {
       kicker: logs.entries.first().executor,
       reason: logs.entries.first().reason,
