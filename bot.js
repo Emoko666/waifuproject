@@ -74,12 +74,13 @@ helpcmd(commands, "Quiz", "all", "Games", "Shows the bot pings.", `quiz <anime>`
 //? helpcmd(commands, "NSFW", "all", "Image", "Retrieves images from the neko.life image board.", `nsfw [yuri | boobs | pussy | neko | bj | kuni | cumslut | lesbian | small-boobs | anal | pussy | wank]`)
 helpcmd(commands, "NSFW", "all", "Image", "N/A", `N/A`)
 })
-client.on("error", (error) => client.channels.get("474245438837620736").send(error))
+client.on("error", (error) => client.channels.get("474245438837620736").send(error, {code: "js"}))
 .on('reconnecting', () => console.log(`reconnecting`)).on('disconnect', () => console.log('disconnecting'))
 process.on("unhandledRejection", (err) => client.channels.get("474245438837620736").send(`\`\`\`js\n${err}\`\`\` `))
 client.on('guildMemberAdd', member => {
     if(member.user.bot) return;
-    member.guild.channels.get("347377586017665027").send(`O New Pal ${member} jumped in メ NightCorePals メ ! Welcome <:Wave:348835926291644427> have a fun time here ^^`, {files: ["https://i.imgur.com/kfQDwer.jpg"]})
+    member.guild.channels.get("487493909136801802").send(`O New Pal ${member} jumped in メ NightCorePals メ ! Welcome <:Wave:348835926291644427> have a fun time here ^^`, {files: ["https://i.imgur.com/kfQDwer.jpg"]})
+    member.guild.channels.get("487563237425020929").send(`Hey ${member.user.username} welcome to **NightCorePals**! Please make sure to read <#487563237425020929> & <#487562774596026368> and have fun <:Wave:348835926291644427>`)
 })
 /////////////// Other Client Events //////////////////
 client.on('message', async function(message) {
