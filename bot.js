@@ -93,22 +93,23 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     client.channels.get("487593558195437588").send(embed)
 })
 
-client.on('guildBanAdd', async (guild, user) => {
-  const logx = await guild.fetchAuditLogs({ 
-      type: 22,
-  })
-  const logs = logx.entries.find(m => m.target === user); 
-  const banner = logs.entries.first().executor
-  const reason = logs.entries.first().reason || "*Not specified*"
-  const embed = new RichEmbed()
-  embed.setAuthor(`${banner.username} (${banner.id})`, banner.avatarURL)
-  embed.setDescription(`Action: **Member Banned**`)
-  embed.setColor("RED")
-  embed.addField(`Member banned`, user, true)
-  embed.addField(`Reason`, reason, true)
-  embed.setTimestamp();
-  client.channels.get("487593558195437588").send(embed)
-})
+// client.on('guildBanAdd', async (guild, user) => {
+//   const logx = await guild.fetchAuditLogs({ 
+//       type: 22,
+//       user: user
+//   })
+//   const logs = logx.entries.find(m => m.target === user).die
+//   const banner = logs.executor
+//   const reason = logs.entries.first().reason || "*Not specified*"
+//   const embed = new RichEmbed()
+//   embed.setAuthor(`${banner.username} (${banner.id})`, banner.avatarURL)
+//   embed.setDescription(`Action: **Member Banned**`)
+//   embed.setColor("RED")
+//   embed.addField(`Member banned`, user, true)
+//   embed.addField(`Reason`, reason, true)
+//   embed.setTimestamp();
+//   client.channels.get("487593558195437588").send(embed)
+// })
 
 client.on('messageDelete', (message) => {
   const embed = new RichEmbed()
@@ -131,29 +132,29 @@ client.on('guildMemberAdd', (member) => {
   client.channels.get("487593558195437588").send(embed)
 })
 
-client.on('guildMemberRemove', async (member) => {
-  const checker = Date.now()
-  const logx = await member.guild.fetchAuditLogs({
-      type: 20, 
-      user: member.user,
-  })
-  const logs = logx.entries.find(m => m.target === user); 
-  let log = {
-      kicker: logs.entries.first().executor,
-      reason: logs.entries.first().reason,
-  }
-  if(logs.entries.first().createdTimestamp <= checker-5000) log = undefined; 
-  const embed = new RichEmbed()
-  embed.setAuthor(`${member.displayName} (${member.id})`, member.user.avatarURL)
-  embed.setDescription(`Action: **User left**`)
-  if(log) {
-      embed.addField(`Kicker`, log.kicker, true);
-      embed.addField(`Reason`, log.reason, true)
-  }
-  embed.setColor("RED")
-  embed.setTimestamp();
-  client.channels.get("487593558195437588").send(embed)
-})
+// client.on('guildMemberRemove', async (member) => {
+//   const checker = Date.now()
+//   const logx = await member.guild.fetchAuditLogs({
+//       type: 20, 
+//       user: member.user,
+//   })
+//   const logs = logx.entries.find(m => m.target === user); 
+//   let log = {
+//       kicker: logs.entries.first().executor,
+//       reason: logs.entries.first().reason,
+//   }
+//   if(logs.entries.first().createdTimestamp <= checker-5000) log = undefined; 
+//   const embed = new RichEmbed()
+//   embed.setAuthor(`${member.displayName} (${member.id})`, member.user.avatarURL)
+//   embed.setDescription(`Action: **User left**`)
+//   if(log) {
+//       embed.addField(`Kicker`, log.kicker, true);
+//       embed.addField(`Reason`, log.reason, true)
+//   }
+//   embed.setColor("RED")
+//   embed.setTimestamp();
+//   client.channels.get("487593558195437588").send(embed)
+// })
 
 /////////////// Other Client Events //////////////////
 client.on('message', async function(message) {
