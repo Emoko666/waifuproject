@@ -83,7 +83,13 @@ client.on('guildMemberAdd', member => {
     member.guild.channels.get("487563237425020929").send(`Hey ${member} welcome to **NightCorePals**! Please make sure to read <#487563237425020929> & <#487562774596026368> and have fun <:Wave:348835926291644427>`)
 })
 client.on('messageUpdate', (oldMessage, newMessage) => {
-    client.channels.get("487593558195437588").send(`${oldMessage.member.user}`)
+    const embed = new RichEmbed()
+    embed.setAuthor(`${oldMessage.member.displayName} (${oldMessage.member.id})`, oldMessage.member.user.avatarURL)
+    embed.setDescription(`Action: **Message Update**`)
+    embed.addField(`Old Message`, oldMessage.content, true)
+    embed.addField(`New Message`, newMessage.content, true)
+    embed.setTimestamp();
+    client.channels.get("487593558195437588").send(embed)
 })
 /////////////// Other Client Events //////////////////
 client.on('message', async function(message) {
