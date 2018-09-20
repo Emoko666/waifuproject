@@ -579,7 +579,7 @@ client.on('messageDelete', message => {
 	var logChannel = message.guild.channels.find(c => c.name === 'log');
 	if(!logChannel) return;
 
-	let messageDelete = new Discord.RichEmbed()
+	let messageDelete = new RichEmbed()
 	.setTitle('**[MESSAGE DELETE]**')
 	.setColor('RED')
 	.setThumbnail(message.author.avatarURL)
@@ -601,7 +601,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 	if(oldMessage.content.startsWith('https://')) return;
 
-	let messageUpdate = new Discord.RichEmbed()
+	let messageUpdate = new RichEmbed()
 	.setTitle('**[MESSAGE EDIT]**')
 	.setThumbnail(oldMessage.author.avatarURL)
 	.setColor('BLUE')
@@ -625,7 +625,7 @@ client.on('roleCreate', role => {
 		var userID = logs.entries.first().executor.id;
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
-		let roleCreate = new Discord.RichEmbed()
+		let roleCreate = new RichEmbed()
 		.setTitle('**[ROLE CREATE]**')
 		.setThumbnail(userAvatar)
 		.setDescription(`**\n**:white_check_mark: Successfully \`\`CREATE\`\` Role.\n\n**Role Name:** \`\`${role.name}\`\` (ID: ${role.id})\n**By:** <@${userID}> (ID: ${userID})`)
@@ -648,7 +648,7 @@ client.on('roleDelete', role => {
 		var userID = logs.entries.first().executor.id;
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
-		let roleDelete = new Discord.RichEmbed()
+		let roleDelete = new RichEmbed()
 		.setTitle('**[ROLE DELETE]**')
 		.setThumbnail(userAvatar)
 		.setDescription(`**\n**:white_check_mark: Successfully \`\`DELETE\`\` Role.\n\n**Role Name:** \`\`${role.name}\`\` (ID: ${role.id})\n**By:** <@${userID}> (ID: ${userID})`)
@@ -672,7 +672,7 @@ client.on('roleUpdate', (oldRole, newRole) => {
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
 		if(oldRole.name !== newRole.name) {
-			let roleUpdateName = new Discord.RichEmbed()
+			let roleUpdateName = new RichEmbed()
 			.setTitle('**[ROLE NAME UPDATE]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -693,7 +693,7 @@ client.on('roleUpdate', (oldRole, newRole) => {
 			}else {
 				var newColor = newRole.hexColor;
 			}
-			let roleUpdateColor = new Discord.RichEmbed()
+			let roleUpdateColor = new RichEmbed()
 			.setTitle('**[ROLE COLOR UPDATE]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -730,7 +730,7 @@ client.on('channelCreate', channel => {
 		var userID = logs.entries.first().executor.id;
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
-		let channelCreate = new Discord.RichEmbed()
+		let channelCreate = new RichEmbed()
 		.setTitle('**[CHANNEL CREATE]**')
 		.setThumbnail(userAvatar)
 		.setDescription(`**\n**:white_check_mark: Successfully \`\`CREATE\`\` **${roomType}** channel.\n\n**Channel Name:** \`\`${channel.name}\`\` (ID: ${channel.id})\n**By:** <@${userID}> (ID: ${userID})`)
@@ -763,7 +763,7 @@ client.on('channelDelete', channel => {
 		var userID = logs.entries.first().executor.id;
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
-		let channelDelete = new Discord.RichEmbed()
+		let channelDelete = new RichEmbed()
 		.setTitle('**[CHANNEL DELETE]**')
 		.setThumbnail(userAvatar)
 		.setDescription(`**\n**:white_check_mark: Successfully \`\`DELETE\`\` **${roomType}** channel.\n\n**Channel Name:** \`\`${channel.name}\`\` (ID: ${channel.id})\n**By:** <@${userID}> (ID: ${userID})`)
@@ -795,7 +795,7 @@ client.on('channelUpdate', (oldChannel, newChannel) => {
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
 		if(oldChannel.name !== newChannel.name) {
-			let newName = new Discord.RichEmbed()
+			let newName = new RichEmbed()
 			.setTitle('**[CHANNEL EDIT]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -806,7 +806,7 @@ client.on('channelUpdate', (oldChannel, newChannel) => {
 			logChannel.send(newName);
 		}
 		if(oldChannel.topic !== newChannel.topic) {
-			let newTopic = new Discord.RichEmbed()
+			let newTopic = new RichEmbed()
 			.setTitle('**[CHANNEL EDIT]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -834,7 +834,7 @@ client.on('guildBanAdd', (guild, user) => {
 
 		if(userID === client.user.id) return;
 
-		let banInfo = new Discord.RichEmbed()
+		let banInfo = new RichEmbed()
 		.setTitle('**[BANNED]**')
 		.setThumbnail(userAvatar)
 		.setColor('DARK_RED')
@@ -858,7 +858,7 @@ client.on('guildBanRemove', (guild, user) => {
 
 		if(userID === client.user.id) return;
 
-		let unBanInfo = new Discord.RichEmbed()
+		let unBanInfo = new RichEmbed()
 		.setTitle('**[UNBANNED]**')
 		.setThumbnail(userAvatar)
 		.setColor('GREEN')
@@ -882,7 +882,7 @@ client.on('guildUpdate', (oldGuild, newGuild) => {
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
 		if(oldGuild.name !== newGuild.name) {
-			let guildName = new Discord.RichEmbed()
+			let guildName = new RichEmbed()
 			.setTitle('**[CHANGE GUILD NAME]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -893,7 +893,7 @@ client.on('guildUpdate', (oldGuild, newGuild) => {
 			logChannel.send(guildName)
 		}
 		if(oldGuild.region !== newGuild.region) {
-			let guildRegion = new Discord.RichEmbed()
+			let guildRegion = new RichEmbed()
 			.setTitle('**[CHANGE GUILD REGION]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -936,7 +936,7 @@ client.on('guildUpdate', (oldGuild, newGuild) => {
 				var newVerLvl = 'Very Hard';
 			}
 
-			let verLog = new Discord.RichEmbed()
+			let verLog = new RichEmbed()
 			.setTitle('**[GUILD VERIFICATION LEVEL CHANGE]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -971,7 +971,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 				var newNM = newMember.nickname;
 			}
 
-			let updateNickname = new Discord.RichEmbed()
+			let updateNickname = new RichEmbed()
 			.setTitle('**[UPDATE MEMBER NICKNAME]**')
 			.setThumbnail(userAvatar)
 			.setColor('BLUE')
@@ -984,7 +984,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 		if(oldMember.roles.size < newMember.roles.size) {
 			let role = newMember.roles.filter(r => !oldMember.roles.has(r.id)).first();
 
-			let roleAdded = new Discord.RichEmbed()
+			let roleAdded = new RichEmbed()
 			.setTitle('**[ADDED ROLE TO MEMBER]**')
 			.setThumbnail(oldMember.guild.iconURL)
 			.setColor('GREEN')
@@ -997,7 +997,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 		if(oldMember.roles.size > newMember.roles.size) {
 			let role = oldMember.roles.filter(r => !newMember.roles.has(r.id)).first();
 
-			let roleRemoved = new Discord.RichEmbed()
+			let roleRemoved = new RichEmbed()
 			.setTitle('**[REMOVED ROLE FROM MEMBER]**')
 			.setThumbnail(oldMember.guild.iconURL)
 			.setColor('RED')
@@ -1009,7 +1009,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 		}
 	})
 	if(oldMember.guild.owner.id !== newMember.guild.owner.id) {
-		let newOwner = new Discord.RichEmbed()
+		let newOwner = new RichEmbed()
 		.setTitle('**[UPDATE GUILD OWNER]**')
 		.setThumbnail(oldMember.guild.iconURL)
 		.setColor('GREEN')
@@ -1036,7 +1036,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 		var userAvatar = logs.entries.first().executor.avatarURL;
 
 		if(voiceOld.serverMute === false && voiceNew.serverMute === true) {
-			let serverMutev = new Discord.RichEmbed()
+			let serverMutev = new RichEmbed()
 			.setTitle('**[VOICE MUTE]**')
 			.setThumbnail('https://images-ext-1.discordapp.net/external/pWQaw076OHwVIFZyeFoLXvweo0T_fDz6U5C9RBlw_fQ/https/cdn.pg.sa/UosmjqDNgS.png')
 			.setColor('RED')
@@ -1047,7 +1047,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 			logChannel.send(serverMutev);
 		}
 		if(voiceOld.serverMute === true && voiceNew.serverMute === false) {
-			let serverUnmutev = new Discord.RichEmbed()
+			let serverUnmutev = new RichEmbed()
 			.setTitle('**[VOICE UNMUTE]**')
 			.setThumbnail('https://images-ext-1.discordapp.net/external/u2JNOTOc1IVJGEb1uCKRdQHXIj5-r8aHa3tSap6SjqM/https/cdn.pg.sa/Iy4t8H4T7n.png')
 			.setColor('GREEN')
@@ -1058,7 +1058,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 			logChannel.send(serverUnmutev);
 		}
 		if(voiceOld.serverDeaf === false && voiceNew.serverDeaf === true) {
-			let serverDeafv = new Discord.RichEmbed()
+			let serverDeafv = new RichEmbed()
 			.setTitle('**[VOICE DEAF]**')
 			.setThumbnail('https://images-ext-1.discordapp.net/external/7ENt2ldbD-3L3wRoDBhKHb9FfImkjFxYR6DbLYRjhjA/https/cdn.pg.sa/auWd5b95AV.png')
 			.setColor('RED')
@@ -1069,7 +1069,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 			logChannel.send(serverDeafv);
 		}
 		if(voiceOld.serverDeaf === true && voiceNew.serverDeaf === false) {
-			let serverUndeafv = new Discord.RichEmbed()
+			let serverUndeafv = new RichEmbed()
 			.setTitle('**[VOICE UNDEAF]**')
 			.setThumbnail('https://images-ext-2.discordapp.net/external/s_abcfAlNdxl3uYVXnA2evSKBTpU6Ou3oimkejx3fiQ/https/cdn.pg.sa/i7fC8qnbRF.png')
 			.setColor('GREEN')
@@ -1081,7 +1081,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 		}
 	})
 	if(voiceOld.voiceChannelID !== voiceNew.voiceChannelID && !voiceOld.voiceChannel) {
-		let voiceJoin = new Discord.RichEmbed()
+		let voiceJoin = new RichEmbed()
 		.setTitle('**[JOIN VOICE ROOM]**')
 		.setColor('GREEN')
 		.setThumbnail(voiceOld.user.avatarURL)
@@ -1092,7 +1092,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 		logChannel.send(voiceJoin);
 	}
 	if(voiceOld.voiceChannelID !== voiceNew.voiceChannelID && !voiceNew.voiceChannel) {
-		let voiceLeave = new Discord.RichEmbed()
+		let voiceLeave = new RichEmbed()
 		.setTitle('**[LEAVE VOICE ROOM]**')
 		.setColor('GREEN')
 		.setThumbnail(voiceOld.user.avatarURL)
@@ -1103,7 +1103,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 		logChannel.send(voiceLeave);
 	}
 	if(voiceOld.voiceChannelID !== voiceNew.voiceChannelID && voiceNew.voiceChannel && voiceOld.voiceChannel != null) {
-		let voiceLeave = new Discord.RichEmbed()
+		let voiceLeave = new RichEmbed()
 		.setTitle('**[CHANGED VOICE ROOM]**')
 		.setColor('GREEN')
 		.setThumbnail(voiceOld.user.avatarURL)
