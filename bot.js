@@ -1183,7 +1183,7 @@ client.on('message' , message => {
 
 
 client.on('message',message =>{
- if(message.content.split(' ')[0].toLowerCase() == prefix + 'myinv') {
+ if(message.content.split(' ')[0].toLowerCase() == prefix + 'invites') {
 let guild = message.guild
 var codes = [""]
  var nul = 0
