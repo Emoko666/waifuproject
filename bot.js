@@ -79,8 +79,8 @@ client.on("error", (error) => client.channels.get("474245438837620736").send(err
 process.on("unhandledRejection", (err) => client.channels.get("474245438837620736").send(`\`\`\`js\n${err}\`\`\` `))
 client.on('guildMemberAdd', member => {
     if(member.user.bot) return;
-    member.guild.channels.get("487493909136801802").send(`O New Pal ${member} jumped in メ NightCorePals メ ! Welcome <:Wave:348835926291644427> have a fun time here ^^`, {files: ["https://i.imgur.com/kfQDwer.jpg"]})
-    member.guild.channels.get("487563237425020929").send(`Hey ${member} welcome to **NightCorePals**! Please make sure to read <#487563374230503424> And have fun <:Wave:348835926291644427>`)
+    member.guild.channels.get("496250530323234827").send(`O New Pal ${member} jumped in メ NightCorePals メ ! Welcome <:Wave:348835926291644427> have a fun time here ^^`, {files: ["https://i.imgur.com/kfQDwer.jpg"]})
+    member.guild.channels.get("496221356149571585").send(`Hey ${member} welcome to **NightCorePals**! Please make sure to read <#496222081814495232> And have fun <:Wave:348835926291644427>`)
 })
 
 client.on('message', async function(message) {
