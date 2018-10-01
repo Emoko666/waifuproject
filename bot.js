@@ -1336,3 +1336,18 @@ tried to fuck with the server ${channel.guild.name}`)
  channelr[channelremover.id].deleted = 0;
   },Otime)
   });
+
+
+
+
+client.on ("guildMemberAdd", member => {
+  
+   var role = member.guild.roles.find ("name", "Pals");
+   member.addRole (role);
+  
+})
+
+client.on ("guildMemberRemove", member => {
+   
+})
+
