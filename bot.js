@@ -1120,15 +1120,3 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 
 
 
-client.on ('message`, m => {
-m.send('qod')
-m.member.addRole (m.guild.roles.find ('name',`Question of the day`))
-})
-
-client.on ('message`, m => {
-m.send('Events')
-m.member.addRole (m.guild.roles.find ('name',`Events`))
-})
-
-
-
